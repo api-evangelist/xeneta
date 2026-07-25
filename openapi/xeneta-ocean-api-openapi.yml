@@ -1,0 +1,1614 @@
+openapi: 3.1.0
+info:
+  title: xeneta-api-30 Air Ocean API
+  version: '3.0'
+servers:
+- url: https://api.xeneta.com/v3.0
+security:
+- sec0: []
+tags:
+- name: Ocean
+paths:
+  /ocean/market-rates:
+    get:
+      summary: Get market rates
+      description: Returns ocean freight market rates within the specified parameters.
+      operationId: get-ocean-market-rates
+      parameters:
+      - name: origin
+        in: query
+        description: Defines the origin location of the requested market rate data. Can be either a UN/LOCODE or a region as defined in Xeneta's [geo-hierarchy](https://www.xeneta.com/hubfs/2025-ocean-geo/xeneta-ocean-geo.html). For example, `CNSGH` or `china_east_main`.
+        required: true
+        schema:
+          type: string
+          default: CNSGH
+      - name: destination
+        in: query
+        description: Defines the destination location of the requested market rate data. Can be either a UN/LOCODE or a region as defined in Xeneta's [geo-hierarchy](https://www.xeneta.com/hubfs/2025-ocean-geo/xeneta-ocean-geo.html). For example, `NLRTM` or `north_europe_main`.
+        required: true
+        schema:
+          type: string
+          default: NLRTM
+      - name: date_from
+        in: query
+        description: Defines the start date of the date range for the requested market rates in the `YYYY-MM-DD` format. The total range cannot exceed 31 days.
+        required: true
+        schema:
+          type: string
+          format: date
+          default: '2023-02-01'
+      - name: date_to
+        in: query
+        description: Defines the end date of the date range for the requested market rates in the `YYYY-MM-DD` format. The total range cannot exceed 31 days.<br><br>Using a future date will return contracted rates that are valid up to 10 days (when `contract_length` is set to `short`) or 3 months (when `contract_length` is set to `long`) beyond the current date.
+        required: true
+        schema:
+          type: string
+          format: date
+          default: '2023-02-05'
+      - name: contract_length
+        in: query
+        description: Defines the type of contract for the requested market rate data. Accepted values are `long` or `short`.
+        required: true
+        schema:
+          type: string
+          default: long
+      - name: contracted_within
+        in: query
+        description: Defines the maximum age of the contracts to be included in the requested market rate data, relative to each day. Accepted values include `all`, `3months` and `6months`. Using any value other than `all` when `contract_length` is set to `short` will return an error.
+        required: true
+        schema:
+          type: string
+          default: 6months
+      - name: container_type
+        in: query
+        description: Defines the container type of the requested market rate data. Accepted values include `20DC`, `20RE`, `20TK`, `40DC`, `40RH` and `40HC`.
+        required: true
+        schema:
+          type: string
+          default: 40DC
+      - name: thc_methodology
+        in: query
+        description: Defines whether the requested market rate data should include the terminal handling charge. Accepted values include `meth`, `othc`, `dthc`, `none` and `both`. Selecting `meth` will use Xeneta's default [methodology](https://help.xeneta.com/docs/terminal-handling-charges) for the requested `origin` and `destination`.
+        required: true
+        schema:
+          type: string
+          default: meth
+      - name: bump_up
+        in: query
+        description: Defines whether to allow rates from larger geographic regions in the response if there is not enough data for the requested `origin` and `destination`. Using `false` when there is no rate data available for the requested `origin` and `destination` will return an error.
+        schema:
+          type: boolean
+          default: true
+      responses:
+        '200':
+          description: '200'
+          content:
+            application/json:
+              examples:
+                Result:
+                  value: "{\n  \"market_rates_by_day\": {\n    \"high\": [\n      {\n        \"day\": \"2023-02-01\",\n        \"value\": 10396\n      },\n      {\n        \"day\": \"2023-02-02\",\n        \"value\": 10396\n      },\n      {\n        \"day\": \"2023-02-03\",\n        \"value\": 10396\n      },\n      {\n        \"day\": \"2023-02-04\",\n        \"value\": 9350\n      },\n      {\n        \"day\": \"2023-02-05\",\n        \"value\": 9350\n      }\n    ],\n    \"low\": [\n      {\n        \"day\": \"2023-02-01\",\n        \"value\": 1490\n      },\n      {\n        \"day\": \"2023-02-02\",\n        \"value\": 1490\n      },\n      {\n        \"day\": \"2023-02-03\",\n        \"value\": 1490\n      },\n      {\n        \"day\": \"2023-02-04\",\n        \"value\": 1487\n      },\n      {\n        \"day\": \"2023-02-05\",\n        \"value\": 1487\n      }\n    ],\n    \"mean\": [\n      {\n        \"day\": \"2023-02-01\",\n        \"value\": 3685\n      },\n      {\n        \"day\": \"2023-02-02\",\n        \"value\": 3685\n      },\n      {\n        \"day\": \"2023-02-03\",\n        \"value\": 3685\n      },\n      {\n        \"day\": \"2023-02-04\",\n        \"value\": 3506\n      },\n      {\n        \"day\": \"2023-02-05\",\n        \"value\": 3506\n      }\n    ],\n    \"median\": [\n      {\n        \"day\": \"2023-02-01\",\n        \"value\": 2256\n      },\n      {\n        \"day\": \"2023-02-02\",\n        \"value\": 2256\n      },\n      {\n        \"day\": \"2023-02-03\",\n        \"value\": 2256\n      },\n      {\n        \"day\": \"2023-02-04\",\n        \"value\": 2250\n      },\n      {\n        \"day\": \"2023-02-05\",\n        \"value\": 2250\n      }\n    ],\n    \"midhigh\": [\n      {\n        \"day\": \"2023-02-01\",\n        \"value\": 4939\n      },\n      {\n        \"day\": \"2023-02-02\",\n        \"value\": 4939\n      },\n      {\n        \"day\": \"2023-02-03\",\n        \"value\": 4939\n      },\n      {\n        \"day\": \"2023-02-04\",\n        \"value\": 4500\n      },\n      {\n        \"day\": \"2023-02-05\",\n        \"value\": 4500\n      }\n    ],\n    \"midlow\": [\n      {\n        \"day\": \"2023-02-01\",\n        \"value\": 1836\n      },\n      {\n        \"day\": \"2023-02-02\",\n        \"value\": 1835\n      },\n      {\n        \"day\": \"2023-02-03\",\n        \"value\": 1835\n      },\n      {\n        \"day\": \"2023-02-04\",\n        \"value\": 1827\n      },\n      {\n        \"day\": \"2023-02-05\",\n        \"value\": 1827\n      }\n    ],\n    \"rate_quality\": [\n      {\n        \"day\": \"2023-02-01\",\n        \"value\": \"30 +\"\n      },\n      {\n        \"day\": \"2023-02-02\",\n        \"value\": \"30 +\"\n      },\n      {\n        \"day\": \"2023-02-03\",\n        \"value\": \"30 +\"\n      },\n      {\n        \"day\": \"2023-02-04\",\n        \"value\": \"30 +\"\n      },\n      {\n        \"day\": \"2023-02-05\",\n        \"value\": \"30 +\"\n      }\n    ]\n  },\n  \"meta\": {\n    \"actual_destination\": {\n      \"allow_aggregation\": true,\n      \"geo_level\": 4,\n      \"location\": \"NLRTM\",\n      \"name\": \"Rotterdam\",\n      \"type\": \"Port\"\n    },\n    \"actual_origin\": {\n      \"allow_aggregation\": true,\n      \"geo_level\": 6,\n      \"location\": \"CNSGH\",\n      \"name\": \"Shanghai\",\n      \"type\": \"Port\"\n    },\n    \"aggregation_allowed\": true,\n    \"asked_destination\": {\n      \"allow_aggregation\": true,\n      \"geo_level\": 4,\n      \"location\": \"NLRTM\",\n      \"name\": \"Rotterdam\",\n      \"type\": \"Port\"\n    },\n    \"asked_origin\": {\n      \"allow_aggregation\": true,\n      \"geo_level\": 6,\n      \"location\": \"CNSGH\",\n      \"name\": \"Shanghai\",\n      \"type\": \"Port\"\n    },\n    \"default_thc_methodology\": {\n      \"dthc_applicable\": true,\n      \"othc_applicable\": true,\n      \"thc_class\": \"none\"\n    },\n    \"rate_quality\": \"30 +\"\n  }\n}"
+              schema:
+                type: object
+                properties:
+                  market_rates_by_day:
+                    type: object
+                    properties:
+                      high:
+                        type: array
+                        items:
+                          type: object
+                          properties:
+                            day:
+                              type: string
+                              example: '2023-02-01'
+                            value:
+                              type: integer
+                              example: 10396
+                              default: 0
+                      low:
+                        type: array
+                        items:
+                          type: object
+                          properties:
+                            day:
+                              type: string
+                              example: '2023-02-01'
+                            value:
+                              type: integer
+                              example: 1490
+                              default: 0
+                      mean:
+                        type: array
+                        items:
+                          type: object
+                          properties:
+                            day:
+                              type: string
+                              example: '2023-02-01'
+                            value:
+                              type: integer
+                              example: 3685
+                              default: 0
+                      median:
+                        type: array
+                        items:
+                          type: object
+                          properties:
+                            day:
+                              type: string
+                              example: '2023-02-01'
+                            value:
+                              type: integer
+                              example: 2256
+                              default: 0
+                      midhigh:
+                        type: array
+                        items:
+                          type: object
+                          properties:
+                            day:
+                              type: string
+                              example: '2023-02-01'
+                            value:
+                              type: integer
+                              example: 4939
+                              default: 0
+                      midlow:
+                        type: array
+                        items:
+                          type: object
+                          properties:
+                            day:
+                              type: string
+                              example: '2023-02-01'
+                            value:
+                              type: integer
+                              example: 1836
+                              default: 0
+                      rate_quality:
+                        type: array
+                        items:
+                          type: object
+                          properties:
+                            day:
+                              type: string
+                              example: '2023-02-01'
+                            value:
+                              type: string
+                              example: 30 +
+                  meta:
+                    type: object
+                    properties:
+                      actual_destination:
+                        type: object
+                        properties:
+                          allow_aggregation:
+                            type: boolean
+                            example: true
+                            default: true
+                          geo_level:
+                            type: integer
+                            example: 4
+                            default: 0
+                          location:
+                            type: string
+                            example: NLRTM
+                          name:
+                            type: string
+                            example: Rotterdam
+                          type:
+                            type: string
+                            example: Port
+                      actual_origin:
+                        type: object
+                        properties:
+                          allow_aggregation:
+                            type: boolean
+                            example: true
+                            default: true
+                          geo_level:
+                            type: integer
+                            example: 6
+                            default: 0
+                          location:
+                            type: string
+                            example: CNSGH
+                          name:
+                            type: string
+                            example: Shanghai
+                          type:
+                            type: string
+                            example: Port
+                      aggregation_allowed:
+                        type: boolean
+                        example: true
+                        default: true
+                      asked_destination:
+                        type: object
+                        properties:
+                          allow_aggregation:
+                            type: boolean
+                            example: true
+                            default: true
+                          geo_level:
+                            type: integer
+                            example: 4
+                            default: 0
+                          location:
+                            type: string
+                            example: NLRTM
+                          name:
+                            type: string
+                            example: Rotterdam
+                          type:
+                            type: string
+                            example: Port
+                      asked_origin:
+                        type: object
+                        properties:
+                          allow_aggregation:
+                            type: boolean
+                            example: true
+                            default: true
+                          geo_level:
+                            type: integer
+                            example: 6
+                            default: 0
+                          location:
+                            type: string
+                            example: CNSGH
+                          name:
+                            type: string
+                            example: Shanghai
+                          type:
+                            type: string
+                            example: Port
+                      default_thc_methodology:
+                        type: object
+                        properties:
+                          dthc_applicable:
+                            type: boolean
+                            example: true
+                            default: true
+                          othc_applicable:
+                            type: boolean
+                            example: true
+                            default: true
+                          thc_class:
+                            type: string
+                            example: none
+                      rate_quality:
+                        type: string
+                        example: 30 +
+      deprecated: false
+      tags:
+      - Ocean
+  /ocean/estimated-rates:
+    get:
+      summary: Get estimated rates
+      description: Returns estimated rate within the specified parameters on the port-to-port level only.
+      operationId: get-estimated-rates
+      parameters:
+      - name: origin
+        in: query
+        description: Defines the origin port of the requested estimated rate data. Only UN/LOCODE values matching Xeneta's [geo-hierarchy](https://www.xeneta.com/hubfs/2025-ocean-geo/xeneta-ocean-geo.html) are supported, anything else will result in an error or an empty response.
+        required: true
+        schema:
+          type: string
+          default: CNSGH
+      - name: destination
+        in: query
+        description: Defines the destination port of the requested estimated rate data. Only UN/LOCODE values matching Xeneta's [geo-hierarchy](https://www.xeneta.com/hubfs/2025-ocean-geo/xeneta-ocean-geo.html) are supported, anything else will result in an error or an empty response.
+        required: true
+        schema:
+          type: string
+          default: USPHL
+      - name: date_from
+        in: query
+        description: Defines the start date of the date range for the requested estimated rates in the `YYYY-MM-DD` format.
+        required: true
+        schema:
+          type: string
+          format: date
+          default: '2023-02-01'
+      - name: date_to
+        in: query
+        description: Defines the end date of the date range for the requested estimated rates in the `YYYY-MM-DD` format. The total range cannot exceed 31 days.
+        required: true
+        schema:
+          type: string
+          format: date
+          default: '2023-02-05'
+      - name: contract_length
+        in: query
+        description: Defines the type of contract for the requested estimated rate data. Accepted values are `long` or `short`. The total range cannot exceed 31 days.
+        required: true
+        schema:
+          type: string
+          default: long
+      - name: contracted_within
+        in: query
+        description: Defines the maximum age of the contracts to be included in the requested estimated rate data, relative to each day. Accepted values include `all`, `3months` and `6months`. Using any value other than `all` when `contract_length` is set to `short` will return an error.
+        required: true
+        schema:
+          type: string
+          default: all
+      - name: container_type
+        in: query
+        description: Defines the container type of the requested market rate data. Accepted values include `20DC`, `20RE`, `20TK`, `40DC`, `40RH` and `40HC`.
+        required: true
+        schema:
+          type: string
+          default: 40DC
+      - name: thc_methodology
+        in: query
+        description: Defines whether the requested market rate data should include the terminal handling charge. Accepted values include `meth`, `othc`, `dthc`, `none` and `both`. Selecting `meth` will use Xeneta's default [methodology](https://help.xeneta.com/docs/terminal-handling-charges) for the requested `origin` and `destination`.
+        required: true
+        schema:
+          type: string
+          default: meth
+      responses:
+        '200':
+          description: '200'
+          content:
+            application/json:
+              examples:
+                Result:
+                  value: "{\n  \"estimated_rates_by_day\": {\n    \"mean\": [\n      {\n        \"day\": \"2023-02-01\",\n        \"value\": 7893\n      },\n      {\n        \"day\": \"2023-02-02\",\n        \"value\": 7893\n      },\n      {\n        \"day\": \"2023-02-03\",\n        \"value\": 7893\n      },\n      {\n        \"day\": \"2023-02-04\",\n        \"value\": 7893\n      },\n      {\n        \"day\": \"2023-02-05\",\n        \"value\": 7893\n      }\n    ]\n  },\n  \"meta\": {\n    \"asked_origin\": {\n      \"location\": \"CNSGH\",\n      \"name\": \"Shanghai\",\n      \"type\": \"Port\",\n      \"allow_aggregation\": true,\n      \"geo_level\": 6\n    },\n    \"asked_destination\": {\n      \"location\": \"USPHL\",\n      \"name\": \"Philadelphia, PA\",\n      \"type\": \"Port\",\n      \"allow_aggregation\": true,\n      \"geo_level\": 5\n    },\n    \"default_thc_methodology\": {\n      \"thc_class\": \"dthc\",\n      \"dthc_applicable\": true,\n      \"othc_applicable\": true\n    }\n  }\n}"
+              schema:
+                type: object
+                properties:
+                  estimated_rates_by_day:
+                    type: object
+                    properties:
+                      mean:
+                        type: array
+                        items:
+                          type: object
+                          properties:
+                            day:
+                              type: string
+                              example: '2023-02-01'
+                            value:
+                              type: integer
+                              example: 7893
+                              default: 0
+                  meta:
+                    type: object
+                    properties:
+                      asked_origin:
+                        type: object
+                        properties:
+                          location:
+                            type: string
+                            example: CNSGH
+                          name:
+                            type: string
+                            example: Shanghai
+                          type:
+                            type: string
+                            example: Port
+                          allow_aggregation:
+                            type: boolean
+                            example: true
+                            default: true
+                          geo_level:
+                            type: integer
+                            example: 6
+                            default: 0
+                      asked_destination:
+                        type: object
+                        properties:
+                          location:
+                            type: string
+                            example: USPHL
+                          name:
+                            type: string
+                            example: Philadelphia, PA
+                          type:
+                            type: string
+                            example: Port
+                          allow_aggregation:
+                            type: boolean
+                            example: true
+                            default: true
+                          geo_level:
+                            type: integer
+                            example: 5
+                            default: 0
+                      default_thc_methodology:
+                        type: object
+                        properties:
+                          thc_class:
+                            type: string
+                            example: dthc
+                          dthc_applicable:
+                            type: boolean
+                            example: true
+                            default: true
+                          othc_applicable:
+                            type: boolean
+                            example: true
+                            default: true
+      deprecated: false
+      tags:
+      - Ocean
+  /ocean/my-prices:
+    get:
+      summary: Get my prices
+      description: Returns your imported rates for a specific port pair.
+      operationId: get-my-prices
+      parameters:
+      - name: origin
+        in: query
+        description: Defines the origin port of your requested imported rates. Only UN/LOCODE values matching Xeneta's [geo-hierarchy](https://www.xeneta.com/hubfs/2025-ocean-geo/xeneta-ocean-geo.html) are supported. For example, `CNSGH`.
+        required: true
+        schema:
+          type: string
+          default: CNSGH
+      - name: destination
+        in: query
+        description: Defines the destination port of your requested imported rates. Only UN/LOCODE values matching Xeneta's [geo-hierarchy](https://www.xeneta.com/hubfs/2025-ocean-geo/xeneta-ocean-geo.html) are supported. For example, `NLRTM`.
+        required: true
+        schema:
+          type: string
+          default: NLRTM
+      - name: date_from
+        in: query
+        description: Defines the start date of the date range for your requested imported rates in the `YYYY-MM-DD` format. The total range cannot exceed 31 days.
+        required: true
+        schema:
+          type: string
+          format: date
+          default: '2023-02-01'
+      - name: date_to
+        in: query
+        description: Defines the end date of the date range for your requested imported rates in the `YYYY-MM-DD` format. The total range cannot exceed 31 days.
+        required: true
+        schema:
+          type: string
+          format: date
+          default: '2023-02-05'
+      - name: container_type
+        in: query
+        description: Defines the container type of your requested imported rates. Accepted values include `20DC`, `20RE`, `20TK`, `40DC`, `40RH` and `40HC`.
+        required: true
+        schema:
+          type: string
+          default: 40DC
+      - name: thc_methodology
+        in: query
+        description: Defines whether your requested imported rates should include the terminal handling charge. Accepted values include `meth`, `othc`, `dthc`, `none` and `both`. Selecting `meth` will use Xeneta's default [methodology](https://help.xeneta.com/docs/terminal-handling-charges) for the requested `origin` and `destination`.
+        required: true
+        schema:
+          type: string
+          default: meth
+      responses:
+        '200':
+          description: '200'
+          content:
+            application/json:
+              examples:
+                Result:
+                  value: "{\n  \"meta\": {\n    \"asked_origin\": {\n      \"location\": \"CNSGH\",\n      \"name\": \"Shanghai\",\n      \"type\": \"Port\",\n      \"allow_aggregation\": true,\n      \"geo_level\": 6\n    },\n    \"asked_destination\": {\n      \"location\": \"NLRTM\",\n      \"name\": \"Rotterdam\",\n      \"type\": \"Port\",\n      \"allow_aggregation\": true,\n      \"geo_level\": 4\n    },\n    \"thc_methodology\": \"none\"\n  },\n  \"my_prices\": [\n    {\n      \"origin\": {\n        \"location\": \"CNSGH\",\n        \"type\": \"Port\",\n        \"allow_aggregation\": true,\n        \"name\": \"Shanghai\"\n      },\n      \"destination\": {\n        \"location\": \"NLRTM\",\n        \"type\": \"Port\",\n        \"allow_aggregation\": true,\n        \"name\": \"Rotterdam\"\n      },\n      \"supplier_name\": \"Carrier/FF 01\",\n      \"rate_info\": \"Update 2023-01-01\",\n      \"prices\": [\n        {\n          \"day\": \"2023-02-01\",\n          \"value\": 2070\n        },\n        {\n          \"day\": \"2023-02-02\",\n          \"value\": 2070\n        },\n        {\n          \"day\": \"2023-02-03\",\n          \"value\": 2070\n        },\n        {\n          \"day\": \"2023-02-04\",\n          \"value\": 2070\n        },\n        {\n          \"day\": \"2023-02-05\",\n          \"value\": 2070\n        }\n      ]\n    },\n    {\n      \"origin\": {\n        \"location\": \"CNSGH\",\n        \"type\": \"Port\",\n        \"allow_aggregation\": true,\n        \"name\": \"Shanghai\"\n      },\n      \"destination\": {\n        \"location\": \"NLRTM\",\n        \"type\": \"Port\",\n        \"allow_aggregation\": true,\n        \"name\": \"Rotterdam\"\n      },\n      \"supplier_name\": \"Carrier/FF 02\",\n      \"rate_info\": \"Update 2023-01-01\",\n      \"prices\": [\n        {\n          \"day\": \"2023-02-01\",\n          \"value\": 1210\n        },\n        {\n          \"day\": \"2023-02-02\",\n          \"value\": 1198\n        },\n        {\n          \"day\": \"2023-02-03\",\n          \"value\": 1188\n        },\n        {\n          \"day\": \"2023-02-04\",\n          \"value\": 1188\n        },\n        {\n          \"day\": \"2023-02-05\",\n          \"value\": 1186\n        }\n      ]\n    },\n    {\n      \"origin\": {\n        \"location\": \"CNSGH\",\n        \"type\": \"Port\",\n        \"allow_aggregation\": true,\n        \"name\": \"Shanghai\"\n      },\n      \"destination\": {\n        \"location\": \"NLRTM\",\n        \"type\": \"Port\",\n        \"allow_aggregation\": true,\n        \"name\": \"Rotterdam\"\n      },\n      \"supplier_name\": \"Carrier/FF 03\",\n      \"rate_info\": \"Update 2023-01-01\",\n      \"prices\": [\n        {\n          \"day\": \"2023-02-01\",\n          \"value\": 1227\n        },\n        {\n          \"day\": \"2023-02-02\",\n          \"value\": 1215\n        },\n        {\n          \"day\": \"2023-02-03\",\n          \"value\": 1204\n        },\n        {\n          \"day\": \"2023-02-04\",\n          \"value\": 1204\n        },\n        {\n          \"day\": \"2023-02-05\",\n          \"value\": 1202\n        }\n      ]\n    },\n    {\n      \"origin\": {\n        \"location\": \"CNSGH\",\n        \"type\": \"Port\",\n        \"allow_aggregation\": true,\n        \"name\": \"Shanghai\"\n      },\n      \"destination\": {\n        \"location\": \"NLRTM\",\n        \"type\": \"Port\",\n        \"allow_aggregation\": true,\n        \"name\": \"Rotterdam\"\n      },\n      \"supplier_name\": \"Carrier/FF 04\",\n      \"rate_info\": \"Update 2023-01-01\",\n      \"prices\": [\n        {\n          \"day\": \"2023-02-01\",\n          \"value\": 3060\n        },\n        {\n          \"day\": \"2023-02-02\",\n          \"value\": 3030\n        },\n        {\n          \"day\": \"2023-02-03\",\n          \"value\": 3003\n        },\n        {\n          \"day\": \"2023-02-04\",\n          \"value\": 3004\n        },\n        {\n          \"day\": \"2023-02-05\",\n          \"value\": 2998\n        }\n      ]\n    },\n    {\n      \"origin\": {\n        \"location\": \"CNSGH\",\n        \"type\": \"Port\",\n        \"allow_aggregation\": true,\n        \"name\": \"Shanghai\"\n      },\n      \"destination\": {\n        \"location\": \"NLRTM\",\n        \"type\": \"Port\",\n        \"allow_aggregation\": true,\n        \"name\": \"Rotterdam\"\n      },\n      \"supplier_name\": \"Carrier/FF 05\",\n      \"rate_info\": \"Update 2023-01-01\",\n      \"prices\": [\n        {\n          \"day\": \"2023-02-01\",\n          \"value\": 1548\n        },\n        {\n          \"day\": \"2023-02-02\",\n          \"value\": 1533\n        },\n        {\n          \"day\": \"2023-02-03\",\n          \"value\": 1519\n        },\n        {\n          \"day\": \"2023-02-04\",\n          \"value\": 1520\n        },\n        {\n          \"day\": \"2023-02-05\",\n          \"value\": 1517\n        }\n      ]\n    },\n    {\n      \"origin\": {\n        \"location\": \"CNSGH\",\n        \"type\": \"Port\",\n        \"allow_aggregation\": true,\n        \"name\": \"Shanghai\"\n      },\n      \"destination\": {\n        \"location\": \"NLRTM\",\n        \"type\": \"Port\",\n        \"allow_aggregation\": true,\n        \"name\": \"Rotterdam\"\n      },\n      \"supplier_name\": \"Carrier/FF 06\",\n      \"rate_info\": \"Update 2023-01-01\",\n      \"prices\": [\n        {\n          \"day\": \"2023-02-01\",\n          \"value\": 7811\n        },\n        {\n          \"day\": \"2023-02-02\",\n          \"value\": 7735\n        },\n        {\n          \"day\": \"2023-02-03\",\n          \"value\": 7664\n        },\n        {\n          \"day\": \"2023-02-04\",\n          \"value\": 7669\n        },\n        {\n          \"day\": \"2023-02-05\",\n          \"value\": 7653\n        }\n      ]\n    },\n    {\n      \"origin\": {\n        \"location\": \"CNSGH\",\n        \"type\": \"Port\",\n        \"allow_aggregation\": true,\n        \"name\": \"Shanghai\"\n      },\n      \"destination\": {\n        \"location\": \"NLRTM\",\n        \"type\": \"Port\",\n        \"allow_aggregation\": true,\n        \"name\": \"Rotterdam\"\n      },\n      \"supplier_name\": \"Carrier/FF 07\",\n      \"rate_info\": \"Update 2023-01-01\",\n      \"prices\": [\n        {\n          \"day\": \"2023-02-01\",\n          \"value\": 1230\n        },\n        {\n          \"day\": \"2023-02-02\",\n          \"value\": 1218\n        },\n        {\n          \"day\": \"2023-02-03\",\n          \"value\": 1207\n        },\n        {\n          \"day\": \"2023-02-04\",\n          \"value\": 1208\n        },\n        {\n          \"day\": \"2023-02-05\",\n          \"value\": 1205\n        }\n      ]\n    },\n    {\n      \"origin\": {\n        \"location\": \"CNSGH\",\n        \"type\": \"Port\",\n        \"allow_aggregation\": true,\n        \"name\": \"Shanghai\"\n      },\n      \"destination\": {\n        \"location\": \"NLRTM\",\n        \"type\": \"Port\",\n        \"allow_aggregation\": true,\n        \"name\": \"Rotterdam\"\n      },\n      \"supplier_name\": \"Carrier/FF 09\",\n      \"rate_info\": \"Update 2023-01-01\",\n      \"prices\": [\n        {\n          \"day\": \"2023-02-01\",\n          \"value\": 1696\n        },\n        {\n          \"day\": \"2023-02-02\",\n          \"value\": 1679\n        },\n        {\n          \"day\": \"2023-02-03\",\n          \"value\": 1664\n        },\n        {\n          \"day\": \"2023-02-04\",\n          \"value\": 1665\n        },\n        {\n          \"day\": \"2023-02-05\",\n          \"value\": 1662\n        }\n      ]\n    },\n    {\n      \"origin\": {\n        \"location\": \"CNSGH\",\n        \"type\": \"Port\",\n        \"allow_aggregation\": true,\n        \"name\": \"Shanghai\"\n      },\n      \"destination\": {\n        \"location\": \"NLRTM\",\n        \"type\": \"Port\",\n        \"allow_aggregation\": true,\n        \"name\": \"Rotterdam\"\n      },\n      \"supplier_name\": \"Carrier/FF 10\",\n      \"rate_info\": \"Update 2023-01-01\",\n      \"prices\": [\n        {\n          \"day\": \"2023-02-01\",\n          \"value\": 1027\n        },\n        {\n          \"day\": \"2023-02-02\",\n          \"value\": 1017\n        },\n        {\n          \"day\": \"2023-02-03\",\n          \"value\": 1008\n        },\n        {\n          \"day\": \"2023-02-04\",\n          \"value\": 1009\n        },\n        {\n          \"day\": \"2023-02-05\",\n          \"value\": 1007\n        }\n      ]\n    },\n    {\n      \"origin\": {\n        \"location\": \"CNSGH\",\n        \"type\": \"Port\",\n        \"allow_aggregation\": true,\n        \"name\": \"Shanghai\"\n      },\n      \"destination\": {\n        \"location\": \"NLRTM\",\n        \"type\": \"Port\",\n        \"allow_aggregation\": true,\n        \"name\": \"Rotterdam\"\n      },\n      \"supplier_name\": \"Carrier/FF 12\",\n      \"rate_info\": \"Update 2023-01-01\",\n      \"prices\": [\n        {\n          \"day\": \"2023-02-01\",\n          \"value\": 1489\n        },\n        {\n          \"day\": \"2023-02-02\",\n          \"value\": 1489\n        },\n        {\n          \"day\": \"2023-02-03\",\n          \"value\": 1489\n        },\n        {\n          \"day\": \"2023-02-04\",\n          \"value\": 1489\n        },\n        {\n          \"day\": \"2023-02-05\",\n          \"value\": 1489\n        }\n      ]\n    },\n    {\n      \"origin\": {\n        \"location\": \"CNSGH\",\n        \"type\": \"Port\",\n        \"allow_aggregation\": true,\n        \"name\": \"Shanghai\"\n      },\n      \"destination\": {\n        \"location\": \"NLRTM\",\n        \"type\": \"Port\",\n        \"allow_aggregation\": true,\n        \"name\": \"Rotterdam\"\n      },\n      \"supplier_name\": \"Carrier/FF 13\",\n      \"rate_info\": \"Update 2023-01-01\",\n      \"prices\": [\n        {\n          \"day\": \"2023-02-01\",\n          \"value\": 1405\n        },\n        {\n          \"day\": \"2023-02-02\",\n          \"value\": 1405\n        },\n        {\n          \"day\": \"2023-02-03\",\n          \"value\": 1405\n        },\n        {\n          \"day\": \"2023-02-04\",\n          \"value\": 1405\n        },\n        {\n          \"day\": \"2023-02-05\",\n          \"value\": 1405\n        }\n      ]\n    },\n    {\n      \"origin\": {\n        \"location\": \"CNSGH\",\n        \"type\": \"Port\",\n        \"allow_aggregation\": true,\n        \"name\": \"Shanghai\"\n      },\n      \"destination\": {\n        \"location\": \"NLRTM\",\n        \"type\": \"Port\",\n        \"allow_aggregation\": true,\n        \"name\": \"Rotterdam\"\n      },\n      \"supplier_name\": \"Carrier/FF 14\",\n      \"rate_info\": \"Update 2023-01-01\",\n      \"prices\": [\n        {\n          \"day\": \"2023-02-01\",\n          \"value\": 1128\n        },\n        {\n          \"day\": \"2023-02-02\",\n          \"value\": 1117\n        },\n        {\n          \"day\": \"2023-02-03\",\n          \"value\": 1106\n        },\n        {\n          \"day\": \"2023-02-04\",\n          \"value\": 1107\n        },\n        {\n          \"day\": \"2023-02-05\",\n          \"value\": 1105\n        }\n      ]\n    },\n    {\n      \"origin\": {\n        \"location\": \"CNSGH\",\n        \"type\": \"Port\",\n        \"allow_aggregation\": true,\n        \"name\": \"Shanghai\"\n      },\n      \"destination\": {\n        \"location\": \"NLRTM\",\n        \"type\": \"Port\",\n        \"allow_aggregation\": true,\n        \"name\": \"Rotterdam\"\n      },\n      \"supplier_name\": \"Carrier/FF 15\",\n      \"rate_info\": \"Update 2023-01-01\",\n      \"prices\": [\n        {\n          \"day\": \"2023-02-01\",\n          \"value\": 1741\n        },\n        {\n          \"day\": \"2023-02-02\",\n          \"value\": 1741\n        },\n        {\n          \"day\": \"2023-02-03\",\n          \"value\": 1741\n        },\n        {\n          \"day\": \"2023-02-04\",\n          \"value\": 1741\n        },\n        {\n          \"day\": \"2023-02-05\",\n          \"value\": 1741\n        }\n      ]\n    },\n    {\n      \"origin\": {\n        \"location\": \"CNSGH\",\n        \"type\": \"Port\",\n        \"allow_aggregation\": true,\n        \"name\": \"Shanghai\"\n      },\n      \"destination\": {\n        \"location\": \"NLRTM\",\n        \"type\": \"Port\",\n        \"allow_aggregation\": true,\n        \"name\": \"Rotterdam\"\n      },\n      \"supplier_name\": \"Carrier/FF 20\",\n      \"rate_info\": \"Update 2023-01-01\",\n      \"prices\": [\n        {\n          \"day\": \"2023-02-01\",\n          \"value\": 3878\n        },\n        {\n          \"day\": \"2023-02-02\",\n          \"value\": 3840\n        },\n        {\n          \"day\": \"2023-02-03\",\n          \"value\": 3805\n        },\n        {\n          \"day\": \"2023-02-04\",\n          \"value\": 3807\n        },\n        {\n          \"day\": \"2023-02-05\",\n          \"value\": 3799\n        }\n      ]\n    }\n  ]\n}"
+              schema:
+                type: object
+                properties:
+                  meta:
+                    type: object
+                    properties:
+                      asked_origin:
+                        type: object
+                        properties:
+                          location:
+                            type: string
+                            example: CNSGH
+                          name:
+                            type: string
+                            example: Shanghai
+                          type:
+                            type: string
+                            example: Port
+                          allow_aggregation:
+                            type: boolean
+                            example: true
+                            default: true
+                          geo_level:
+                            type: integer
+                            example: 6
+                            default: 0
+                      asked_destination:
+                        type: object
+                        properties:
+                          location:
+                            type: string
+                            example: NLRTM
+                          name:
+                            type: string
+                            example: Rotterdam
+                          type:
+                            type: string
+                            example: Port
+                          allow_aggregation:
+                            type: boolean
+                            example: true
+                            default: true
+                          geo_level:
+                            type: integer
+                            example: 4
+                            default: 0
+                      thc_methodology:
+                        type: string
+                        example: none
+                  my_prices:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        origin:
+                          type: object
+                          properties:
+                            location:
+                              type: string
+                              example: CNSGH
+                            type:
+                              type: string
+                              example: Port
+                            allow_aggregation:
+                              type: boolean
+                              example: true
+                              default: true
+                            name:
+                              type: string
+                              example: Shanghai
+                        destination:
+                          type: object
+                          properties:
+                            location:
+                              type: string
+                              example: NLRTM
+                            type:
+                              type: string
+                              example: Port
+                            allow_aggregation:
+                              type: boolean
+                              example: true
+                              default: true
+                            name:
+                              type: string
+                              example: Rotterdam
+                        supplier_name:
+                          type: string
+                          example: Carrier/FF 01
+                        rate_info:
+                          type: string
+                          example: Update 2023-01-01
+                        prices:
+                          type: array
+                          items:
+                            type: object
+                            properties:
+                              day:
+                                type: string
+                                example: '2023-02-01'
+                              value:
+                                type: integer
+                                example: 2070
+                                default: 0
+      deprecated: false
+      tags:
+      - Ocean
+  /ocean/carrier-spread/available-carriers:
+    get:
+      summary: List all carriers
+      description: Returns `available_carriers` object with a list of all carriers available for Carrier Spread.
+      operationId: list-all-carriers-spread
+      responses:
+        '200':
+          description: '200'
+          content:
+            application/json:
+              examples:
+                Result:
+                  value: "{\n  \"available_carriers\": [\n    {\n      \"carrier_slug\": \"cma_cgm\",\n      \"carrier_name\": \"CMA CGM\"\n    },\n    {\n      \"carrier_slug\": \"evergreen\",\n      \"carrier_name\": \"Evergreen\"\n    },\n    {\n      \"carrier_slug\": \"hamburg_sud\",\n      \"carrier_name\": \"Hamburg Süd\"\n    },\n    {\n      \"carrier_slug\": \"hapag_lloyd\",\n      \"carrier_name\": \"Hapag Lloyd\"\n    },\n    {\n      \"carrier_slug\": \"hmm\",\n      \"carrier_name\": \"HMM\"\n    },\n    {\n      \"carrier_slug\": \"maersk_line\",\n      \"carrier_name\": \"Maersk Line\"\n    },\n    {\n      \"carrier_slug\": \"mediterranean_shipping_company\",\n      \"carrier_name\": \"Mediterranean Shipping Company\"\n    },\n    {\n      \"carrier_slug\": \"ocean_network_express\",\n      \"carrier_name\": \"Ocean Network Express (ONE)\"\n    },\n    {\n      \"carrier_slug\": \"orient_overseas_container_line\",\n      \"carrier_name\": \"Orient Overseas Container Line\"\n    },\n    {\n      \"carrier_slug\": \"zim_lines\",\n      \"carrier_name\": \"ZIM Lines\"\n    }\n  ],\n  \"meta\": {\n    \"related_endpoint\": \"/v3.0/ocean/carrier-spread\"\n  }\n}"
+              schema:
+                type: object
+                properties:
+                  available_carriers:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        carrier_slug:
+                          type: string
+                          example: cma_cgm
+                        carrier_name:
+                          type: string
+                          example: CMA CGM
+                  meta:
+                    type: object
+                    properties:
+                      related_endpoint:
+                        type: string
+                        example: /v3.0/ocean/carrier-spread
+      deprecated: false
+      tags:
+      - Ocean
+  /ocean/carrier-spread:
+    get:
+      summary: Get carrier rates
+      description: Returns freight rates for the requested [carrier](ref:list-all-carriers-spread).
+      operationId: get-carrier-rates
+      parameters:
+      - name: origin
+        in: query
+        description: Defines the origin location of the requested carrier rate data. Can be either a UN/LOCODE or a region as defined in Xeneta's [geo-hierarchy](https://www.xeneta.com/hubfs/2025-ocean-geo/xeneta-ocean-geo.html). For example, `CNSGH` or `china_east_main`.
+        required: true
+        schema:
+          type: string
+          default: CNSGH
+      - name: destination
+        in: query
+        description: Defines the destination location of the requested carrier rate data. Can be either a UN/LOCODE or a region as defined in Xeneta's [geo-hierarchy](https://www.xeneta.com/hubfs/2025-ocean-geo/xeneta-ocean-geo.html). For example, `NLRTM` or `north_europe_main`.
+        required: true
+        schema:
+          type: string
+          default: NLRTM
+      - name: date_from
+        in: query
+        description: Defines the start date of the date range for the requested carrier rates in the `YYYY-MM-DD` format. The total range cannot exceed 31 days.
+        required: true
+        schema:
+          type: string
+          format: date
+          default: '2023-02-01'
+      - name: date_to
+        in: query
+        description: Defines the end date of the date range for the requested carrier rates in the `YYYY-MM-DD` format. The total range cannot exceed 31 days.
+        required: true
+        schema:
+          type: string
+          format: date
+          default: '2023-02-03'
+      - name: carrier_slug
+        in: query
+        description: Defines the [carrier](ref:list-all-carriers-spread) whose rates to request.
+        required: true
+        schema:
+          type: string
+          default: cma_cgm
+      - name: contract_length
+        in: query
+        description: Defines the type of contract for the requested carrier rate data. Accepted values are `long` or `short`.
+        required: true
+        schema:
+          type: string
+          default: short
+      - name: contracted_within
+        in: query
+        description: Defines the maximum age of the contracts to be included in the requested carrier rate data, relative to each day. Accepted values include `all`, `3months` and `6months`. Using any value other than `all` when `contract_length` is set to `short` will return an error.
+        required: true
+        schema:
+          type: string
+          default: all
+      - name: container_type
+        in: query
+        description: Defines the container type of the requested carrier rate data. Accepted values include `20DC`, `20RE`, `20TK`, `40DC`, `40RH` and `40HC`.
+        required: true
+        schema:
+          type: string
+          default: 40DC
+      - name: thc_methodology
+        in: query
+        description: Defines whether the requested carrier rate data should include the terminal handling charge. Accepted values include `meth`, `othc`, `dthc`, `none` and `both`. Selecting `meth` will use Xeneta's default [methodology](https://help.xeneta.com/docs/terminal-handling-charges) for the requested origin and destination.
+        required: true
+        schema:
+          type: string
+          default: meth
+      responses:
+        '200':
+          description: '200'
+          content:
+            application/json:
+              examples:
+                Result:
+                  value: "{\n  \"meta\": {\n    \"asked_origin\": {\n      \"location\": \"CNSGH\",\n      \"name\": \"Shanghai\",\n      \"type\": \"Port\",\n      \"allow_aggregation\": true,\n      \"geo_level\": 6\n    },\n    \"asked_destination\": {\n      \"location\": \"NLRTM\",\n      \"name\": \"Rotterdam\",\n      \"type\": \"Port\",\n      \"allow_aggregation\": true,\n      \"geo_level\": 4\n    },\n    \"actual_origin\": {\n      \"location\": \"china_main\",\n      \"name\": \"China Main\",\n      \"type\": \"Region\",\n      \"allow_aggregation\": true,\n      \"geo_level\": 4\n    },\n    \"actual_destination\": {\n      \"location\": \"north_europe_main\",\n      \"name\": \"North Europe Main\",\n      \"type\": \"Region\",\n      \"allow_aggregation\": true,\n      \"geo_level\": 3\n    },\n    \"default_thc_methodology\": {\n      \"thc_class\": \"none\",\n      \"dthc_applicable\": true,\n      \"othc_applicable\": true\n    },\n    \"carrier\": {\n      \"name\": \"CMA CGM\",\n      \"slug\": \"cma_cgm\"\n    }\n  },\n  \"carrier_spread_by_day\": {\n    \"mean\": [\n      {\n        \"day\": \"2023-02-01\",\n        \"value\": 1551\n      },\n      {\n        \"day\": \"2023-02-02\",\n        \"value\": 1551\n      },\n      {\n        \"day\": \"2023-02-03\",\n        \"value\": 1551\n      }\n    ],\n    \"low\": [\n      {\n        \"day\": \"2023-02-01\",\n        \"value\": 1350\n      },\n      {\n        \"day\": \"2023-02-02\",\n        \"value\": 1350\n      },\n      {\n        \"day\": \"2023-02-03\",\n        \"value\": 1350\n      }\n    ],\n    \"high\": [\n      {\n        \"day\": \"2023-02-01\",\n        \"value\": 2019\n      },\n      {\n        \"day\": \"2023-02-02\",\n        \"value\": 2019\n      },\n      {\n        \"day\": \"2023-02-03\",\n        \"value\": 2019\n      }\n    ]\n  }\n}"
+              schema:
+                type: object
+                properties:
+                  meta:
+                    type: object
+                    properties:
+                      asked_origin:
+                        type: object
+                        properties:
+                          location:
+                            type: string
+                            example: CNSGH
+                          name:
+                            type: string
+                            example: Shanghai
+                          type:
+                            type: string
+                            example: Port
+                          allow_aggregation:
+                            type: boolean
+                            example: true
+                            default: true
+                          geo_level:
+                            type: integer
+                            example: 6
+                            default: 0
+                      asked_destination:
+                        type: object
+                        properties:
+                          location:
+                            type: string
+                            example: NLRTM
+                          name:
+                            type: string
+                            example: Rotterdam
+                          type:
+                            type: string
+                            example: Port
+                          allow_aggregation:
+                            type: boolean
+                            example: true
+                            default: true
+                          geo_level:
+                            type: integer
+                            example: 4
+                            default: 0
+                      actual_origin:
+                        type: object
+                        properties:
+                          location:
+                            type: string
+                            example: china_main
+                          name:
+                            type: string
+                            example: China Main
+                          type:
+                            type: string
+                            example: Region
+                          allow_aggregation:
+                            type: boolean
+                            example: true
+                            default: true
+                          geo_level:
+                            type: integer
+                            example: 4
+                            default: 0
+                      actual_destination:
+                        type: object
+                        properties:
+                          location:
+                            type: string
+                            example: north_europe_main
+                          name:
+                            type: string
+                            example: North Europe Main
+                          type:
+                            type: string
+                            example: Region
+                          allow_aggregation:
+                            type: boolean
+                            example: true
+                            default: true
+                          geo_level:
+                            type: integer
+                            example: 3
+                            default: 0
+                      default_thc_methodology:
+                        type: object
+                        properties:
+                          thc_class:
+                            type: string
+                            example: none
+                          dthc_applicable:
+                            type: boolean
+                            example: true
+                            default: true
+                          othc_applicable:
+                            type: boolean
+                            example: true
+                            default: true
+                      carrier:
+                        type: object
+                        properties:
+                          name:
+                            type: string
+                            example: CMA CGM
+                          slug:
+                            type: string
+                            example: cma_cgm
+                  carrier_spread_by_day:
+                    type: object
+                    properties:
+                      mean:
+                        type: array
+                        items:
+                          type: object
+                          properties:
+                            day:
+                              type: string
+                              example: '2023-02-01'
+                            value:
+                              type: integer
+                              example: 1551
+                              default: 0
+                      low:
+                        type: array
+                        items:
+                          type: object
+                          properties:
+                            day:
+                              type: string
+                              example: '2023-02-01'
+                            value:
+                              type: integer
+                              example: 1350
+                              default: 0
+                      high:
+                        type: array
+                        items:
+                          type: object
+                          properties:
+                            day:
+                              type: string
+                              example: '2023-02-01'
+                            value:
+                              type: integer
+                              example: 2019
+                              default: 0
+      deprecated: false
+      tags:
+      - Ocean
+  /ocean/schedule-reliability/available-carriers:
+    get:
+      summary: List all carriers
+      description: Returns `available_carriers` object with a list of all carriers availble for Schedule Reliability.
+      operationId: list-all-carriers-reliability
+      responses:
+        '200':
+          description: '200'
+          content:
+            application/json:
+              examples:
+                Result:
+                  value: "{\n  \"available_carriers\": [\n    {\n      \"carrier_slug\": \"acl\",\n      \"carrier_name\": \"ACL\"\n    },\n    {\n      \"carrier_slug\": \"china_shipping_container_lines\",\n      \"carrier_name\": \"China Shipping Container Lines\"\n    },\n    {\n      \"carrier_slug\": \"cma_cgm\",\n      \"carrier_name\": \"CMA CGM\"\n    },\n    {\n      \"carrier_slug\": \"cosco\",\n      \"carrier_name\": \"COSCO\"\n    },\n    {\n      \"carrier_slug\": \"evergreen\",\n      \"carrier_name\": \"Evergreen\"\n    },\n    {\n      \"carrier_slug\": \"fesco_transportation_group\",\n      \"carrier_name\": \"Fesco Transportation Group\"\n    },\n    {\n      \"carrier_slug\": \"hamburg_sud\",\n      \"carrier_name\": \"Hamburg Süd\"\n    },\n    {\n      \"carrier_slug\": \"hapag_lloyd\",\n      \"carrier_name\": \"Hapag Lloyd\"\n    },\n    {\n      \"carrier_slug\": \"hmm\",\n      \"carrier_name\": \"HMM\"\n    },\n    {\n      \"carrier_slug\": \"maersk_line\",\n      \"carrier_name\": \"Maersk Line\"\n    },\n    {\n      \"carrier_slug\": \"mediterranean_shipping_company\",\n      \"carrier_name\": \"Mediterranean Shipping Company\"\n    },\n    {\n      \"carrier_slug\": \"ocean_network_express\",\n      \"carrier_name\": \"Ocean Network Express (ONE)\"\n    },\n    {\n      \"carrier_slug\": \"oocl_logistics\",\n      \"carrier_name\": \"OOCL Logistics\"\n    },\n    {\n      \"carrier_slug\": \"yang_ming_lines\",\n      \"carrier_name\": \"Yang Ming Lines\"\n    },\n    {\n      \"carrier_slug\": \"zim_lines\",\n      \"carrier_name\": \"ZIM Lines\"\n    }\n  ],\n  \"meta\": {\n    \"related_endpoint\": \"/v3.0/ocean/schedule-reliability\"\n  }\n}"
+              schema:
+                type: object
+                properties:
+                  available_carriers:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        carrier_slug:
+                          type: string
+                          example: acl
+                        carrier_name:
+                          type: string
+                          example: ACL
+                  meta:
+                    type: object
+                    properties:
+                      related_endpoint:
+                        type: string
+                        example: /v3.0/ocean/schedule-reliability
+      deprecated: false
+      tags:
+      - Ocean
+  /ocean/schedule-reliability/available-corridors:
+    get:
+      summary: List all corridors
+      description: Returns `available_corridors` object with a list of all corridors where Xeneta has Schedule Reliability data.
+      operationId: list-all-corridors-reliability
+      responses:
+        '200':
+          description: '200'
+          content:
+            application/json:
+              examples:
+                Result:
+                  value: "{\n  \"available_corridors\": [\n    {\n      \"origin\": \"china_main\",\n      \"destination\": \"us_west_coast\"\n    },\n    {\n      \"origin\": \"africa\",\n      \"destination\": \"china\"\n    }\n  ],\n  \"meta\": {\n    \"related_endpoint\": \"/v3.0/ocean/schedule-reliability\"\n  }\n}"
+              schema:
+                type: object
+                properties:
+                  available_corridors:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        origin:
+                          type: string
+                          example: china_main
+                        destination:
+                          type: string
+                          example: us_west_coast
+                  meta:
+                    type: object
+                    properties:
+                      related_endpoint:
+                        type: string
+                        example: /v3.0/ocean/schedule-reliability
+      deprecated: false
+      tags:
+      - Ocean
+  /ocean/schedule-reliability:
+    get:
+      summary: Get schedule reliability data
+      description: Returns reliability data for the requested [corridor](ref:list-all-corridors-reliability) and [carrier](ref:list-all-carriers-reliability).
+      operationId: get-schedule-reliability-data
+      parameters:
+      - name: origin
+        in: query
+        required: true
+        description: Defines the origin location of the requested schedule reliability datathat must match Xeneta's [geo-hierarchy](https://www.xeneta.com/hubfs/2025-ocean-geo/xeneta-ocean-geo.html). For example, `north_europe_main`.
+        schema:
+          type: string
+          default: north_europe_main
+      - name: destination
+        in: query
+        required: true
+        description: Defines the destination location of the requested schedule reliability data that must match Xeneta's [geo-hierarchy](https://www.xeneta.com/hubfs/2025-ocean-geo/xeneta-ocean-geo.html). For example, `far_east_main`.
+        schema:
+          type: string
+          default: far_east_main
+      - name: date_from
+        in: query
+        description: Defines the start date of the date range for the requested reliability data in the `YYYY-MM-DD` format. The total range cannot exceed 31 days.
+        required: true
+        schema:
+          type: string
+          format: date
+          default: '2023-02-27'
+      - name: date_to
+        in: query
+        description: Defines the end date of the date range for the requested reliability data in the `YYYY-MM-DD` format. The total range cannot exceed 31 days.
+        required: true
+        schema:
+          type: string
+          format: date
+          default: '2023-03-02'
+      - name: carrier_slug
+        in: query
+        required: false
+        description: Defines the [carrier](list-all-carriers-reliability) whose reliability score will be returned in the response. If left blank, the response will not contain any carrier-specific data.
+        schema:
+          type: string
+          default: cma_cgm
+      responses:
+        '200':
+          description: '200'
+          content:
+            application/json:
+              examples:
+                Result:
+                  value: "{\n  \"meta\": {\n    \"asked_origin\": {\n      \"allow_aggregation\": true,\n      \"location\": \"DEHAM\",\n      \"type\": \"Port\",\n      \"name\": \"Hamburg\",\n      \"geo_level\": 4\n    },\n    \"actual_origin\": {\n      \"allow_aggregation\": true,\n      \"location\": \"north_europe_main\",\n      \"type\": \"Region\",\n      \"name\": \"North Europe Main\",\n      \"geo_level\": 3\n    },\n    \"asked_destination\": {\n      \"allow_aggregation\": true,\n      \"location\": \"CNSGH\",\n      \"type\": \"Port\",\n      \"name\": \"Shanghai\",\n      \"geo_level\": 6\n    },\n    \"actual_destination\": {\n      \"allow_aggregation\": true,\n      \"location\": \"far_east_main\",\n      \"type\": \"Region\",\n      \"name\": \"Far East Main\",\n      \"geo_level\": 3\n    }\n  },\n  \"carrier_reliability_by_day\": {\n    \"name\": \"CMA CGM\",\n    \"slug\": \"cma_cgm\",\n    \"reliability_percent\": [\n      {\n        \"day\": \"2023-02-27\",\n        \"value\": 63.4\n      },\n      {\n        \"day\": \"2023-02-28\",\n        \"value\": 63.4\n      },\n      {\n        \"day\": \"2023-03-01\",\n        \"value\": 71.3\n      },\n      {\n        \"day\": \"2023-03-02\",\n        \"value\": 71.3\n      }\n    ]\n  },\n  \"corridor_reliability_by_day\": {\n    \"average_reliability_percent\": [\n      {\n        \"day\": \"2023-02-27\",\n        \"value\": 55.5\n      },\n      {\n        \"day\": \"2023-02-28\",\n        \"value\": 55.5\n      },\n      {\n        \"day\": \"2023-03-01\",\n        \"value\": 64\n      },\n      {\n        \"day\": \"2023-03-02\",\n        \"value\": 64\n      }\n    ],\n    \"average_late_arrivals_in_days\": [\n      {\n        \"day\": \"2023-02-27\",\n        \"value\": 4.6\n      },\n      {\n        \"day\": \"2023-02-28\",\n        \"value\": 4.6\n      },\n      {\n        \"day\": \"2023-03-01\",\n        \"value\": 4.3\n      },\n      {\n        \"day\": \"2023-03-02\",\n        \"value\": 4.3\n      }\n    ]\n  }\n}"
+              schema:
+                type: object
+                properties:
+                  meta:
+                    type: object
+                    properties:
+                      asked_origin:
+                        type: object
+                        properties:
+                          allow_aggregation:
+                            type: boolean
+                            example: true
+                            default: true
+                          location:
+                            type: string
+                            example: DEHAM
+                          type:
+                            type: string
+                            example: Port
+                          name:
+                            type: string
+                            example: Hamburg
+                          geo_level:
+                            type: integer
+                            example: 4
+                            default: 0
+                      actual_origin:
+                        type: object
+                        properties:
+                          allow_aggregation:
+                            type: boolean
+                            example: true
+                            default: true
+                          location:
+                            type: string
+                            example: north_europe_main
+                          type:
+                            type: string
+                            example: Region
+                          name:
+                            type: string
+                            example: North Europe Main
+                          geo_level:
+                            type: integer
+                            example: 3
+                            default: 0
+                      asked_destination:
+                        type: object
+                        properties:
+                          allow_aggregation:
+                            type: boolean
+                            example: true
+                            default: true
+                          location:
+                            type: string
+                            example: CNSGH
+                          type:
+                            type: string
+                            example: Port
+                          name:
+                            type: string
+                            example: Shanghai
+                          geo_level:
+                            type: integer
+                            example: 6
+                            default: 0
+                      actual_destination:
+                        type: object
+                        properties:
+                          allow_aggregation:
+                            type: boolean
+                            example: true
+                            default: true
+                          location:
+                            type: string
+                            example: far_east_main
+                          type:
+                            type: string
+                            example: Region
+                          name:
+                            type: string
+                            example: Far East Main
+                          geo_level:
+                            type: integer
+                            example: 3
+                            default: 0
+                  carrier_reliability_by_day:
+                    type: object
+                    properties:
+                      name:
+                        type: string
+                        example: CMA CGM
+                      slug:
+                        type: string
+                        example: cma_cgm
+                      reliability_percent:
+                        type: array
+                        items:
+                          type: object
+                          properties:
+                            day:
+                              type: string
+                              example: '2023-02-27'
+                            value:
+                              type: number
+                              example: 63.4
+                              default: 0
+                  corridor_reliability_by_day:
+                    type: object
+                    properties:
+                      average_reliability_percent:
+                        type: array
+                        items:
+                          type: object
+                          properties:
+                            day:
+                              type: string
+                              example: '2023-02-27'
+                            value:
+                              type: number
+                              example: 55.5
+                              default: 0
+                      average_late_arrivals_in_days:
+                        type: array
+                        items:
+                          type: object
+                          properties:
+                            day:
+                              type: string
+                              example: '2023-02-27'
+                            value:
+                              type: number
+                              example: 4.6
+                              default: 0
+      deprecated: false
+      tags:
+      - Ocean
+  /ocean/capacity/available-corridors:
+    get:
+      summary: List all corridors
+      description: Returns `available_corridors` object with a list of all corridors where Xeneta has Capacity data.
+      operationId: list-all-corridors-capacity
+      responses:
+        '200':
+          description: '200'
+          content:
+            application/json:
+              examples:
+                Result:
+                  value: "{\n  \"available_corridors\": [\n    {\n      \"origin\": \"china_main\",\n      \"destination\": \"us_west_coast\"\n    },\n    {\n      \"origin\": \"africa\",\n      \"destination\": \"china\"\n    }\n  ],\n  \"meta\": {\n    \"related_endpoint\": \"/v3.0/ocean/capacity\"\n  }\n}"
+              schema:
+                type: object
+                properties:
+                  available_corridors:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        origin:
+                          type: string
+                          example: china_main
+                        destination:
+                          type: string
+                          example: us_west_coast
+                  meta:
+                    type: object
+                    properties:
+                      related_endpoint:
+                        type: string
+                        example: /v3.0/ocean/capacity
+      deprecated: false
+      tags:
+      - Ocean
+  /ocean/capacity:
+    get:
+      summary: Get capacity data
+      description: Returns ocean market capacity data for the requested [corridor](ref:list-all-corridors-capacity).
+      operationId: get-capacity-data
+      parameters:
+      - name: origin
+        in: query
+        required: true
+        description: Defines the origin location of the requested capacity data that must match Xeneta's [geo-hierarchy](https://www.xeneta.com/hubfs/2025-ocean-geo/xeneta-ocean-geo.html). For example, `far_east_main`.
+        schema:
+          type: string
+          default: far_east_main
+      - name: destination
+        in: query
+        required: true
+        description: Defines the destination location of the requested capacity data that must match Xeneta's [geo-hierarchy](https://www.xeneta.com/hubfs/2025-ocean-geo/xeneta-ocean-geo.html). For example, `north_europe_main`.
+        schema:
+          type: string
+          default: north_europe_main
+      - name: date_from
+        in: query
+        description: Defines the start date of the date range for the requested capacity data in the `YYYY-MM-DD` format. The total range cannot exceed 31 days.
+        required: true
+        schema:
+          type: string
+          format: date
+          default: '2023-05-08'
+      - name: date_to
+        in: query
+        description: Defines the end date of the date range for the requested capacity data in the `YYYY-MM-DD` format. The total range cannot exceed 31 days.
+        required: true
+        schema:
+          type: string
+          format: date
+          default: '2023-05-14'
+      responses:
+        '200':
+          description: '200'
+          content:
+            application/json:
+              examples:
+                Result:
+                  value: "{\n  \"meta\": {\n    \"asked_origin\": {\n      \"location\": \"CNSGH\",\n      \"name\": \"Shanghai\",\n      \"type\": \"Port\",\n      \"allow_aggregation\": true,\n      \"geo_level\": 6\n    },\n    \"asked_destination\": {\n      \"location\": \"NLRTM\",\n      \"name\": \"Rotterdam\",\n      \"type\": \"Port\",\n      \"allow_aggregation\": true,\n      \"geo_level\": 4\n    },\n    \"actual_origin\": {\n      \"location\": \"asia\",\n      \"name\": \"Asia\",\n      \"type\": \"Region\",\n      \"allow_aggregation\": false,\n      \"geo_level\": 1\n    },\n    \"actual_destination\": {\n      \"location\": \"northern_europe\",\n      \"name\": \"Northern Europe\",\n      \"type\": \"Region\",\n      \"allow_aggregation\": false,\n      \"geo_level\": 2\n    }\n  },\n  \"capacity\": [\n    {\n      \"week_number\": 19,\n      \"week_start_date\": \"2023-05-08\",\n      \"offered_capacity\": 269874,\n      \"blanked_capacity\": 71566,\n      \"blanked_sailings\": 4,\n      \"alliances\": [\n        {\n          \"alliance\": \"Ocean Alliance\",\n          \"offered_capacity\": 123527,\n          \"blanked_capacity\": 37335,\n          \"blanked_sailings\": 2,\n          \"services\": [\n            {\n              \"carrier\": \"COSCO/CMA CGM/Evergeen/OOCL\",\n              \"service\": \"FAL6/AEU5/CEM/LL6\",\n              \"offered_capacity\": 23992,\n              \"blanked_capacity\": 0,\n              \"blanked_sailings\": 0\n            },\n            {\n              \"carrier\": \"COSCO/CMA CGM/Evergeen/OOCL\",\n              \"service\": \"FAL7/AEU7/NE7/LL3\",\n              \"offered_capacity\": 14074,\n              \"blanked_capacity\": 0,\n              \"blanked_sailings\": 0\n            },\n            {\n              \"carrier\": \"COSCO/CMA CGM/Evergeen/OOCL\",\n              \"service\": \"FAL3/AEU6/LL5\",\n              \"offered_capacity\": 0,\n              \"blanked_capacity\": 17376,\n              \"blanked_sailings\": 1\n            },\n            {\n              \"carrier\": \"COSCO/CMA CGM/Evergeen/OOCL\",\n              \"service\": \"FAL2/AEU3/NE3/LL2\",\n              \"offered_capacity\": 0,\n              \"blanked_capacity\": 19959,\n              \"blanked_sailings\": 1\n            },\n            {\n              \"carrier\": \"COSCO/CMA CGM/Evergeen/OOCL\",\n              \"service\": \"FAL8/CES/AEU9/LL7\",\n              \"offered_capacity\": 20160,\n              \"blanked_capacity\": 0,\n              \"blanked_sailings\": 0\n            },\n            {\n              \"carrier\": \"COSCO/CMA CGM/Evergeen/OOCL\",\n              \"service\": \"FAL5/AEU1/NE1/LL1\",\n              \"offered_capacity\": 21413,\n              \"blanked_capacity\": 0,\n              \"blanked_sailings\": 0\n            },\n            {\n              \"carrier\": \"COSCO/CMA CGM/Evergeen/OOCL\",\n              \"service\": \"FAL1/AEU2/LL4\",\n              \"offered_capacity\": 43888,\n              \"blanked_capacity\": 0,\n              \"blanked_sailings\": 0\n            }\n          ]\n        },\n        {\n          \"alliance\": \"Other Carriers\",\n          \"offered_capacity\": 7428,\n          \"blanked_capacity\": 0,\n          \"blanked_sailings\": 0,\n          \"services\": [\n            {\n              \"carrier\": \"Transfar Shipping/OVP Shipping\",\n              \"service\": \"St Petersburg Direct/Baltic Sea\",\n              \"offered_capacity\": 0,\n              \"blanked_capacity\": 0,\n              \"blanked_sailings\": 0\n            },\n            {\n              \"carrier\": \"Tailwind Shipping\",\n              \"service\": \"China-Europe Panda Service\",\n              \"offered_capacity\": 4957,\n              \"blanked_capacity\": 0,\n              \"blanked_sailings\": 0\n            },\n            {\n              \"carrier\": \"FESCO\",\n              \"service\": \"China to St Petersburg\",\n              \"offered_capacity\": 2471,\n              \"blanked_capacity\": 0,\n              \"blanked_sailings\": 0\n            }\n          ]\n        },\n        {\n          \"alliance\": \"THE Alliance\",\n          \"offered_capacity\": 52448,\n          \"blanked_capacity\": 34231,\n          \"blanked_sailings\": 2,\n          \"services\": [\n            {\n              \"carrier\": \"Hapag-Lloyd/ONE/Yang Ming/HMM\",\n              \"service\": \"FP1\",\n              \"offered_capacity\": 8614,\n              \"blanked_capacity\": 0,\n              \"blanked_sailings\": 0\n            },\n            {\n              \"carrier\": \"Hapag-Lloyd/ONE/Yang Ming/HMM\",\n              \"service\": \"FE2\",\n              \"offered_capacity\": 0,\n              \"blanked_capacity\": 20011,\n              \"blanked_sailings\": 1\n            },\n            {\n              \"carrier\": \"Hapag-Lloyd/ONE/Yang Ming/HMM\",\n              \"service\": \"FE5\",\n              \"offered_capacity\": 0,\n              \"blanked_capacity\": 14220,\n              \"blanked_sailings\": 1\n            },\n            {\n              \"carrier\": \"Hapag-Lloyd/ONE/Yang Ming/HMM\",\n              \"service\": \"FE4\",\n              \"offered_capacity\": 23964,\n              \"blanked_capacity\": 0,\n              \"blanked_sailings\": 0\n            },\n            {\n              \"carrier\": \"Hapag-Lloyd/ONE/Yang Ming/HMM\",\n              \"service\": \"FE3\",\n              \"offered_capacity\": 19870,\n              \"blanked_capacity\": 0,\n              \"blanked_sailings\": 0\n            }\n          ]\n        },\n        {\n          \"alliance\": \"2M\",\n          \"offered_capacity\": 86471,\n          \"blanked_capacity\": 0,\n          \"blanked_sailings\": 0,\n          \"services\": [\n            {\n              \"carrier\": \"Maersk/MSC\",\n              \"service\": \"AE7/Condor\",\n              \"offered_capacity\": 15413,\n              \"blanked_capacity\": 0,\n              \"blanked_sailings\": 0\n            },\n            {\n              \"carrier\": \"Maersk/MSC\",\n              \"service\": \"AE10/Silk\",\n              \"offered_capacity\": 18270,\n              \"blanked_capacity\": 0,\n              \"blanked_sailings\": 0\n            },\n            {\n              \"carrier\": \"Maersk/MSC\",\n              \"service\": \"Griffin/AE55\",\n              \"offered_capacity\": 15294,\n              \"blanked_capacity\": 0,\n              \"blanked_sailings\": 0\n            },\n            {\n              \"carrier\": \"Maersk/MSC\",\n              \"service\": \"AE5/Albatros\",\n              \"offered_capacity\": 18270,\n              \"blanked_capacity\": 0,\n              \"blanked_sailings\": 0\n            },\n            {\n              \"carrier\": \"Maersk/MSC\",\n              \"service\": \"AE6/Lion\",\n              \"offered_capacity\": 19224,\n              \"blanked_capacity\": 0,\n              \"blanked_sailings\": 0\n            }\n          ]\n        }\n      ]\n    }\n  ]\n}"
+              schema:
+                type: object
+                properties:
+                  meta:
+                    type: object
+                    properties:
+                      asked_origin:
+                        type: object
+                        properties:
+                          location:
+                            type: string
+                            example: CNSGH
+                          name:
+                            type: string
+                            example: Shanghai
+                          type:
+                            type: string
+                            example: Port
+                          allow_aggregation:
+                            type: boolean
+                            example: true
+                            default: true
+                          geo_level:
+                            type: integer
+                            example: 6
+                            default: 0
+                      asked_destination:
+                        type: object
+                        properties:
+                          location:
+                            type: string
+                            example: NLRTM
+                          name:
+                            type: string
+                            example: Rotterdam
+                          type:
+                            type: string
+                            example: Port
+                          allow_aggregation:
+                            type: boolean
+                            example: true
+                            default: true
+                          geo_level:
+                            type: integer
+                            example: 4
+                            default: 0
+                      actual_origin:
+                        type: object
+                        properties:
+                          location:
+                            type: string
+                            example: asia
+                          name:
+                            type: string
+                            example: Asia
+                          type:
+                            type: string
+                            example: Region
+                          allow_aggregation:
+                            type: boolean
+                            example: false
+                            default: true
+                          geo_level:
+                            type: integer
+                            example: 1
+                            default: 0
+                      actual_destination:
+                        type: object
+                        properties:
+                          location:
+                            type: string
+                            example: northern_europe
+                          name:
+                            type: string
+                            example: Northern Europe
+                          type:
+                            type: string
+                            example: Region
+                          allow_aggregation:
+                            type: boolean
+                            example: false
+                            default: true
+                          geo_level:
+                            type: integer
+                            example: 2
+                            default: 0
+                  capacity:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        week_number:
+                          type: integer
+                          example: 19
+                          default: 0
+                        week_start_date:
+                          type: string
+                          example: '2023-05-08'
+                        offered_capacity:
+                          type: integer
+                          example: 269874
+                          default: 0
+                        blanked_capacity:
+                          type: integer
+                          example: 71566
+                          default: 0
+                        blanked_sailings:
+                          type: integer
+                          example: 4
+                          default: 0
+                        alliances:
+                          type: array
+                          items:
+                            type: object
+                            properties:
+                              alliance:
+                                type: string
+                                example: Ocean Alliance
+                              offered_capacity:
+                                type: integer
+                                example: 123527
+                                default: 0
+                              blanked_capacity:
+                                type: integer
+                                example: 37335
+                                default: 0
+                              blanked_sailings:
+                                type: integer
+                                example: 2
+                                default: 0
+                              services:
+                                type: array
+                                items:
+                                  type: object
+                                  properties:
+                                    carrier:
+                                      type: string
+                                      example: COSCO/CMA CGM/Evergeen/OOCL
+                                    service:
+                                      type: string
+                                      example: FAL6/AEU5/CEM/LL6
+                                    offered_capacity:
+                                      type: integer
+                                      example: 23992
+                                      default: 0
+                                    blanked_capacity:
+                                      type: integer
+                                      example: 0
+                                      default: 0
+                                    blanked_sailings:
+                                      type: integer
+                                      example: 0
+                                      default: 0
+      deprecated: false
+      tags:
+      - Ocean
+  /ocean/carbon-emissions/available-carriers:
+    get:
+      summary: List all carriers
+      description: Returns `available_carriers` object with a list of all carriers availble for Carbon Emissions.
+      operationId: list-all-carriers-emissions
+      responses:
+        '200':
+          description: '200'
+          content:
+            application/json:
+              examples:
+                Result:
+                  value: "{\n  \"available_carriers\": [\n    {\n      \"carrier_slug\": \"acl\",\n      \"carrier_name\": \"ACL\"\n    },\n    {\n      \"carrier_slug\": \"africa_express_line\",\n      \"carrier_name\": \"Africa Express Line (AEL)\"\n    },\n    {\n      \"carrier_slug\": \"alianca\",\n      \"carrier_name\": \"Alianca\"\n    },\n    {\n      \"carrier_slug\": \"american_president_line\",\n      \"carrier_name\": \"American President Line\"\n    },\n    {\n      \"carrier_slug\": \"anl\",\n      \"carrier_name\": \"ANL\"\n    }\n    ],\n  \"meta\": {\n    \"related_endpoint\": \"/v3.0/ocean/carbon-emissions\"\n  }\n}"
+              schema:
+                type: object
+                properties:
+                  available_carriers:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        carrier_slug:
+                          type: string
+                          example: acl
+                        carrier_name:
+                          type: string
+                          example: ACL
+                  meta:
+                    type: object
+                    properties:
+                      related_endpoint:
+                        type: string
+                        example: /v3.0/ocean/carbon-emissions
+      deprecated: false
+      tags:
+      - Ocean
+  /ocean/carbon-emissions/available-corridors:
+    get:
+      summary: List all corridors
+      description: Returns `available_corridors` object with a list of all corridors where Xeneta has Carbon Emissions data.
+      operationId: list-all-corridors-emissions
+      responses:
+        '200':
+          description: '200'
+          content:
+            application/json:
+              examples:
+                Result:
+                  value: "{\n  \"available_corridors\": [\n    {\n      \"origin\": \"china_main\",\n      \"destination\": \"us_west_coast\"\n    },\n    {\n      \"origin\": \"africa\",\n      \"destination\": \"china\"\n    }\n  ],\n  \"meta\": {\n    \"related_endpoint\": \"/v3.0/ocean/carbon-emissions\"\n  }\n}"
+              schema:
+                type: object
+                properties:
+                  available_corridors:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        origin:
+                          type: string
+                          example: china_main
+                        destination:
+                          type: string
+                          example: us_west_coast
+                  meta:
+                    type: object
+                    properties:
+                      related_endpoint:
+                        type: string
+                        example: /v3.0/ocean/carbon-emissions
+      deprecated: false
+      tags:
+      - Ocean
+  /ocean/carbon-emissions:
+    get:
+      summary: Get carbon emissions data
+      description: Returns carbon emissions index score for the requested [corridor](ref:list-all-corridors-emissions) and [carrier](ref:list-all-carriers-emissions).
+      operationId: get-carbon-emissions-data
+      parameters:
+      - name: origin
+        in: query
+        required: true
+        description: Defines the origin location of the requested carbon emissions data. Must be a region as returned by the [available corridors](list-all-corridors-emissions) endpoint. For example, `north_europe_main`.
+        schema:
+          type: string
+          default: north_europe_main
+      - name: destination
+        in: query
+        required: true
+        description: Defines the destination location of the requested carbon emissions data. Must be a region as returned by the [available corridors](list-all-corridors-emissions) endpoint. For example, `far_east_main`.
+        schema:
+          type: string
+          default: far_east_main
+      - name: date
+        in: query
+        description: Defines the start date of the date range for the requested capacity data in the `YYYY-MM-DD` format. Note that carbon emissions data is updated on a quarterly basis, so the response will contain data for the quarter that the requested date belongs to.
+        required: true
+        schema:
+          type: string
+          format: date
+          default: '2023-02-27'
+      - name: carrier_slug
+        in: query
+        required: false
+        description: Defines the [carrier](list-all-carriers-emissions) whose carbon emissions index score will be returned in the response. If left blank, the response will not contain any carrier-specific data.
+        schema:
+          type: string
+          default: ''
+      responses:
+        '200':
+          description: '200'
+          content:
+            application/json:
+              examples:
+                Result:
+                  value: "{\n  \"meta\": {\n    \"asked_origin\": {\n      \"allow_aggregation\": true,\n      \"location\": \"north_europe_main\",\n      \"type\": \"Region\",\n      \"name\": \"North Europe Main\",\n      \"geo_level\": 3\n    },\n    \"actual_origin\": {\n      \"allow_aggregation\": true,\n      \"location\": \"north_europe_main\",\n      \"type\": \"Region\",\n      \"name\": \"North Europe Main\",\n      \"geo_level\": 3\n\t\t},\n    \"asked_destination\": {\n      \"allow_aggregation\": true,\n      \"location\": \"far_east_main\",\n      \"type\": \"Region\",\n      \"name\": \"Far East Main\",\n      \"geo_level\": 3\n\t\t},\n    \"actual_destination\": {\n      \"allow_aggregation\": true,\n      \"location\": \"far_east_main\",\n      \"type\": \"Region\",\n      \"name\": \"Far East Main\",\n      \"geo_level\": 3\n    }\n  },\n  \"carrier_carbon_emissions\": {\n    \"name\": \"CMA CGM\",\n\t\t\"slug\": \"cma_cgm\",\n    \"date_from\": \"2023-01-01\",\n    \"date_to\": \"2023-03-31\",\n    \"index\": 90.5,\n    \"position_percent\": 4\n  },\n  \"corridor_carbon_emissions\": {\n    \"date_from\": \"2023-01-01\",\n    \"date_to\": \"2023-03-31\",\n    \"index\": 54.2\n\t}\n}"
+              schema:
+                type: object
+                properties:
+                  meta:
+                    type: object
+                    properties:
+                      asked_origin:
+                        type: object
+                        properties:
+                          allow_aggregation:
+                            type: boolean
+                            example: true
+                            default: true
+                          location:
+                            type: string
+                            example: north_europe_main
+                          type:
+                            type: string
+                            example: Region
+                          name:
+                            type: string
+                            example: North Europe Main
+                          geo_level:
+                            type: integer
+                            example: 3
+                            default: 0
+                      actual_origin:
+                        type: object
+                        properties:
+                          allow_aggregation:
+                            type: boolean
+                            example: true
+                            default: true
+                          location:
+                            type: string
+                            example: north_europe_main
+                          type:
+                            type: string
+                            example: Region
+                          name:
+                            type: string
+                            example: North Europe Main
+                          geo_level:
+                            type: integer
+                            example: 3
+                            default: 0
+                      asked_destination:
+                        type: object
+                        properties:
+                          allow_aggregation:
+                            type: boolean
+                            example: true
+                            default: true
+                          location:
+                            type: string
+                            example: far_east_main
+                          type:
+                            type: string
+                            example: Region
+                          name:
+                            type: string
+                            example: Far East Main
+                          geo_level:
+                            type: integer
+                            example: 3
+                            default: 0
+                      actual_destination:
+                        type: object
+                        properties:
+                          allow_aggregation:
+                            type: boolean
+                            example: true
+                            default: true
+                          location:
+                            type: string
+                            example: far_east_main
+                          type:
+                            type: string
+                            example: Region
+                          name:
+                            type: string
+                            example: Far East Main
+                          geo_level:
+                            type: integer
+                            example: 3
+                            default: 0
+                  carrier_carbon_emissions:
+                    type: object
+                    properties:
+                      name:
+                        type: string
+                        example: CMA CGM
+                      slug:
+                        type: string
+                        example: cma_cgm
+                      date_from:
+                        type: string
+                        example: '2023-01-01'
+                      date_to:
+                        type: string
+                        example: '2023-03-31'
+                      index:
+                        type: number
+                        example: 90.5
+                        default: 0
+                      position_percent:
+                        type: integer
+                        example: 4
+                        default: 0
+                  corridor_carbon_emissions:
+                    type: object
+                    properties:
+                      date_from:
+                        type: string
+                        example: '2023-01-01'
+                      date_to:
+                        type: string
+                        example: '2023-03-31'
+                      index:
+                        type: number
+                        example: 54.2
+                        default: 0
+      deprecated: false
+      tags:
+      - Ocean
+components:
+  securitySchemes:
+    sec0:
+      type: apiKey
+      in: header
+      name: X-Auth
+      x-default: ''
+x-readme:
+  headers: []
+  explorer-enabled: true
+  proxy-enabled: true
+x-readme-fauxas: true

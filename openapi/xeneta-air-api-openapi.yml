@@ -1,0 +1,241 @@
+openapi: 3.1.0
+info:
+  title: xeneta-api-30 Air API
+  version: '3.0'
+servers:
+- url: https://api.xeneta.com/v3.0
+security:
+- sec0: []
+tags:
+- name: Air
+paths:
+  /air/market-rates:
+    get:
+      summary: Get market rates
+      description: Returns air freight market rates within the specified parameters.
+      operationId: get-air-market-rates
+      parameters:
+      - name: origin
+        in: query
+        description: Defines the origin location of the requested market rate data. Can be either an IATA airport code or a region as defined in Xeneta's [geo-hierarchy](https://www.xeneta.com/hubfs/2025-air-geo/xeneta-air-geo.html). For example, `PVG` or `east_china_main`.
+        required: true
+        schema:
+          type: string
+          default: PVG
+      - name: destination
+        in: query
+        description: Defines the destination location of the requested market rate data. Can be either an IATA airport code or a region as defined in Xeneta's [geo-hierarchy](https://www.xeneta.com/hubfs/2025-air-geo/xeneta-air-geo.html). For example, `FRA` or `north_europe_main`.
+        required: true
+        schema:
+          type: string
+          default: FRA
+      - name: date_from
+        in: query
+        description: Defines the start date of the date range for the requested market rates in the `YYYY-MM-DD` format. The total range cannot exceed 31 days.
+        required: true
+        schema:
+          type: string
+          format: date
+          default: '2023-02-01'
+      - name: date_to
+        in: query
+        description: Defines the end date of the date range for the requested market rates in the `YYYY-MM-DD` format. The total range cannot exceed 31 days.
+        required: true
+        schema:
+          type: string
+          format: date
+          default: '2023-02-05'
+      - name: contract_length
+        in: query
+        description: Defines the type of contract for the requested market rate data. `long` is the only accepted value.
+        required: true
+        schema:
+          type: string
+          default: long
+      - name: contracted_within
+        in: query
+        description: Defines the maximum age of the contracts to be included in the requested market rate data, relative to each day. Accepted values include `all` and `3months`.
+        required: true
+        schema:
+          type: string
+          default: all
+      - name: weight_bracket
+        in: query
+        description: Defines the weight category of the requested rate data. Accepted values are `less_than_45kg`, `greater_than_45kg`, `greater_than_200kg`, `greater_than_500kg`, and `greater_than_1000kg`.
+        required: true
+        schema:
+          type: string
+          default: greater_than_500kg
+      - name: service_level
+        in: query
+        description: Defines the service level of the requested rate data. Accepted values are `upper_tier`, `mid_tier`, `lower_tier`, `lower_and_mid_tier`, and `passive`.
+        required: true
+        schema:
+          type: string
+          default: mid_tier
+      responses:
+        '200':
+          description: '200'
+          content:
+            application/json:
+              examples:
+                Result:
+                  value: "{\n  \"meta\": {\n    \"actual_destination\": {\n      \"allow_aggregation\": true,\n      \"location\": \"FRA\",\n      \"name\": \"Frankfurt (FRA)\",\n      \"type\": \"airport\",\n      \"geo_level\": 5\n    },\n    \"actual_origin\": {\n      \"allow_aggregation\": true,\n      \"location\": \"PVG\",\n      \"name\": \"Shanghai (PVG)\",\n      \"type\": \"airport\",\n      \"geo_level\": 7\n    },\n    \"asked_origin\": {\n      \"allow_aggregation\": true,\n      \"location\": \"PVG\",\n      \"name\": \"Shanghai (PVG)\",\n      \"type\": \"airport\",\n      \"geo_level\": 7\n    },\n    \"asked_destination\": {\n      \"allow_aggregation\": true,\n      \"location\": \"FRA\",\n      \"name\": \"Frankfurt (FRA)\",\n      \"type\": \"airport\",\n      \"geo_level\": 5\n    },\n    \"aggregation_allowed\": true,\n    \"rate_quality\": \"30+\"\n  },\n  \"market_rates_by_day\": {\n    \"low\": [\n      {\n        \"day\": \"2023-02-01\",\n        \"value\": 3.54\n      },\n      {\n        \"day\": \"2023-02-02\",\n        \"value\": 3.54\n      },\n      {\n        \"day\": \"2023-02-03\",\n        \"value\": 3.54\n      },\n      {\n        \"day\": \"2023-02-04\",\n        \"value\": 3.54\n      },\n      {\n        \"day\": \"2023-02-05\",\n        \"value\": 3.54\n      }\n    ],\n    \"mean\": [\n      {\n        \"day\": \"2023-02-01\",\n        \"value\": 5.18\n      },\n      {\n        \"day\": \"2023-02-02\",\n        \"value\": 5.18\n      },\n      {\n        \"day\": \"2023-02-03\",\n        \"value\": 5.17\n      },\n      {\n        \"day\": \"2023-02-04\",\n        \"value\": 5.17\n      },\n      {\n        \"day\": \"2023-02-05\",\n        \"value\": 5.17\n      }\n    ],\n    \"high\": [\n      {\n        \"day\": \"2023-02-01\",\n        \"value\": 6.68\n      },\n      {\n        \"day\": \"2023-02-02\",\n        \"value\": 6.68\n      },\n      {\n        \"day\": \"2023-02-03\",\n        \"value\": 6.68\n      },\n      {\n        \"day\": \"2023-02-04\",\n        \"value\": 6.68\n      },\n      {\n        \"day\": \"2023-02-05\",\n        \"value\": 6.68\n      }\n    ],\n    \"rate_quality\": [\n      {\n        \"day\": \"2023-02-01\",\n        \"value\": \"30+\"\n      },\n      {\n        \"day\": \"2023-02-02\",\n        \"value\": \"30+\"\n      },\n      {\n        \"day\": \"2023-02-03\",\n        \"value\": \"30+\"\n      },\n      {\n        \"day\": \"2023-02-04\",\n        \"value\": \"30+\"\n      },\n      {\n        \"day\": \"2023-02-05\",\n        \"value\": \"30+\"\n      }\n    ]\n  }\n}"
+              schema:
+                type: object
+                properties:
+                  meta:
+                    type: object
+                    properties:
+                      actual_destination:
+                        type: object
+                        properties:
+                          allow_aggregation:
+                            type: boolean
+                            example: true
+                            default: true
+                          location:
+                            type: string
+                            example: FRA
+                          name:
+                            type: string
+                            example: Frankfurt (FRA)
+                          type:
+                            type: string
+                            example: airport
+                          geo_level:
+                            type: integer
+                            example: 5
+                            default: 0
+                      actual_origin:
+                        type: object
+                        properties:
+                          allow_aggregation:
+                            type: boolean
+                            example: true
+                            default: true
+                          location:
+                            type: string
+                            example: PVG
+                          name:
+                            type: string
+                            example: Shanghai (PVG)
+                          type:
+                            type: string
+                            example: airport
+                          geo_level:
+                            type: integer
+                            example: 7
+                            default: 0
+                      asked_origin:
+                        type: object
+                        properties:
+                          allow_aggregation:
+                            type: boolean
+                            example: true
+                            default: true
+                          location:
+                            type: string
+                            example: PVG
+                          name:
+                            type: string
+                            example: Shanghai (PVG)
+                          type:
+                            type: string
+                            example: airport
+                          geo_level:
+                            type: integer
+                            example: 7
+                            default: 0
+                      asked_destination:
+                        type: object
+                        properties:
+                          allow_aggregation:
+                            type: boolean
+                            example: true
+                            default: true
+                          location:
+                            type: string
+                            example: FRA
+                          name:
+                            type: string
+                            example: Frankfurt (FRA)
+                          type:
+                            type: string
+                            example: airport
+                          geo_level:
+                            type: integer
+                            example: 5
+                            default: 0
+                      aggregation_allowed:
+                        type: boolean
+                        example: true
+                        default: true
+                      rate_quality:
+                        type: string
+                        example: 30+
+                  market_rates_by_day:
+                    type: object
+                    properties:
+                      low:
+                        type: array
+                        items:
+                          type: object
+                          properties:
+                            day:
+                              type: string
+                              example: '2023-02-01'
+                            value:
+                              type: number
+                              example: 3.54
+                              default: 0
+                      mean:
+                        type: array
+                        items:
+                          type: object
+                          properties:
+                            day:
+                              type: string
+                              example: '2023-02-01'
+                            value:
+                              type: number
+                              example: 5.18
+                              default: 0
+                      high:
+                        type: array
+                        items:
+                          type: object
+                          properties:
+                            day:
+                              type: string
+                              example: '2023-02-01'
+                            value:
+                              type: number
+                              example: 6.68
+                              default: 0
+                      rate_quality:
+                        type: array
+                        items:
+                          type: object
+                          properties:
+                            day:
+                              type: string
+                              example: '2023-02-01'
+                            value:
+                              type: string
+                              example: 30+
+      deprecated: false
+      tags:
+      - Air
+components:
+  securitySchemes:
+    sec0:
+      type: apiKey
+      in: header
+      name: X-Auth
+      x-default: ''
+x-readme:
+  headers: []
+  explorer-enabled: true
+  proxy-enabled: true
+x-readme-fauxas: true
