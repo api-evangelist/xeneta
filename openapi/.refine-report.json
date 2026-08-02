@@ -1,0 +1,16 @@
+{
+  "provider": "xeneta",
+  "sources": [
+    "xeneta-air-api-openapi.yml",
+    "xeneta-ocean-api-openapi.yml"
+  ],
+  "outputs": [
+    "xeneta-air-api-openapi.yml",
+    "xeneta-ocean-api-openapi.yml"
+  ],
+  "archived": [],
+  "errors": [],
+  "warnings": [],
+  "notes": [],
+  "skipped": []
+}

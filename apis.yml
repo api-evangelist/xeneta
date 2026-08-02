@@ -1,28 +1,147 @@
 aid: xeneta
 name: Xeneta
-description: 'Xeneta is a company surfaced as a portfolio company of creandum, point-nine and added to
-  the API Evangelist network as a stub for enrichment. Sector: saas. This profile is a lead awaiting the
-  enrichment pipeline.'
+description: >-
+  Xeneta is an ocean and air freight rate benchmarking and market analytics
+  platform headquartered in Oslo, Norway. It crowdsources contracted freight
+  rates from shippers and forwarders into the world's largest rate database,
+  and its REST API (v3.0) exposes ocean and air market rates, your own
+  contracted prices, carrier spread, estimated rates, capacity, carbon
+  emissions, and schedule reliability data, plus a separate airline reports
+  API for airlines, shippers, and freight forwarders.
 url: https://raw.githubusercontent.com/api-evangelist/xeneta/refs/heads/main/apis.yml
+accessModel:
+  pricing: unknown
+  onboarding: self-serve
+  trial: false
+  try_now: false
+  public: false
+  label: Self-serve signup
+  confidence: medium
+  source:
+  - authentication
+  generated: '2026-07-22'
+  method: derived
+image: https://files.readme.io/f8b1664-xeneta-favicon.ico
 x-type: company
 x-source: vc-portfolio
 x-backed-by:
 - creandum
 - point-nine
-x-tier: stub
-x-tier-reason: portfolio-lead
 specificationVersion: '0.20'
 created: '2026-07-17'
-modified: '2026-07-17'
+modified: '2026-07-21'
 tags:
-- Company
-- Saas
-apis: []
+- Freight
+- Shipping
+- Logistics
+- Ocean Freight
+- Air Freight
+- Benchmarking
+- Market Data
+- Supply Chain
+- Rates
+- Emissions
+apis:
+- name: Xeneta Airline Data API
+  description: >-
+    Airline reports API (Selfie) serving rates, chargeable weight, load factor, and capacity reports as
+    CSV files in ZIP archives. Airlines use a branded host (https://{airline}.useselfie.com/api/selfie/v1);
+    shippers and freight forwarders use the shared yy host. Session-cookie authentication via POST /api/selfie/rest_auth/login.
+  humanURL: https://help.xeneta.com/reference/airline-overview
+  baseURL: https://yy.useselfie.com/api/selfie/v1
+  tags:
+  - Air Freight
+  - Airlines
+  - Reports
+  properties:
+  - type: Documentation
+    url: https://help.xeneta.com/reference/airline-endpoints
+- aid: xeneta:xeneta-air-api
+  name: Xeneta Air API
+  description: The Air API from Xeneta — 1 operation(s) for air.
+  humanURL: https://help.xeneta.com/reference/api
+  baseURL: https://api.xeneta.com/v3.0
+  tags:
+  - Air
+  properties:
+  - type: OpenAPI
+    url: openapi/xeneta-air-api-openapi.yml
+  - type: Documentation
+    url: https://help.xeneta.com/reference/api
+- aid: xeneta:xeneta-ocean-api
+  name: Xeneta Ocean API
+  description: The Ocean API from Xeneta — 13 operation(s) for ocean.
+  humanURL: https://help.xeneta.com/reference/api
+  baseURL: https://api.xeneta.com/v3.0
+  tags:
+  - Ocean
+  properties:
+  - type: OpenAPI
+    url: openapi/xeneta-ocean-api-openapi.yml
+  - type: Documentation
+    url: https://help.xeneta.com/reference/api
 maintainers:
 - FN: Kin Lane
   email: kin@apievangelist.com
 - FN: APIs.json
   email: info@apis.io
 common:
+- type: DomainSecurity
+  url: security/xeneta-domain-security.yml
+- type: Authentication
+  url: authentication/xeneta-authentication.yml
 - type: Website
   url: https://www.xeneta.com/
+- type: DeveloperPortal
+  url: https://help.xeneta.com/reference
+- type: Documentation
+  url: https://help.xeneta.com/docs
+- type: APIReference
+  url: https://help.xeneta.com/reference
+- type: GettingStarted
+  url: https://help.xeneta.com/reference/api
+- type: Support
+  url: https://help.xeneta.com/
+- type: Blog
+  url: https://www.xeneta.com/blog
+- type: GitHubOrganization
+  url: https://github.com/xeneta
+- type: Login
+  url: https://app.xeneta.com/
+- type: TermsOfService
+  url: https://www.xeneta.com/terms-of-service
+- type: PrivacyPolicy
+  url: https://www.xeneta.com/xeneta-privacy-policy
+- type: Compliance
+  url: https://www.xeneta.com/xeneta-data-security
+- type: TrustCenter
+  url: security/xeneta-trust-center.yml
+- type: Packages
+  url: packages/xeneta-packages.yml
+- type: WellKnown
+  url: well-known/xeneta-well-known.yml
+- type: MCPServer
+  url: mcp/xeneta-mcp.yml
+- type: LLMsTxt
+  url: llms/xeneta-llms.txt
+- type: Conformance
+  url: conformance/xeneta-conformance.yml
+- type: ErrorCatalog
+  url: errors/xeneta-problem-types.yml
+- type: Lifecycle
+  url: lifecycle/xeneta-lifecycle.yml
+- type: Deprecation
+  url: https://help.xeneta.com/reference/versioning
+- type: Conventions
+  url: conventions/xeneta-conventions.yml
+- type: ChangeLog
+  url: changelog/xeneta-changelog.yml
+- type: DataModel
+  url: data-model/xeneta-data-model.yml
+- type: AgentSkill
+  url: skills/_index.yml
+x-enrichment:
+  date: '2026-07-21'
+  status: enriched
+  artifacts_added: 18
+  pass: local-v1

@@ -1,0 +1,58 @@
+generated: '2026-07-21'
+method: derived
+status: candidate
+source: openapi/xeneta-api-30-openapi.yml
+description: >-
+  Xeneta operates no official MCP server: the official MCP registry
+  (registry.modelcontextprotocol.io) returns zero results for "xeneta", npm has
+  no Xeneta MCP package, and the developer docs (help.xeneta.com/reference)
+  document only the REST surface. This is a CANDIDATE tool list derived
+  one-tool-per-operation from the Xeneta API v3.0 OpenAPI, authenticated with
+  the X-Auth API-key header.
+server:
+  name: xeneta
+  transport: http
+  auth: apiKey (X-Auth header)
+tools:
+  - name: get_ocean_market_rates
+    description: Get ocean freight market rates for an origin/destination corridor and date range
+    source_operation: openapi/xeneta-api-30-openapi.yml#get-ocean-market-rates
+  - name: get_air_market_rates
+    description: Get air freight market rates for an origin/destination corridor and date range
+    source_operation: openapi/xeneta-api-30-openapi.yml#get-air-market-rates
+  - name: get_my_prices
+    description: Get your own contracted ocean prices benchmarked against the market
+    source_operation: openapi/xeneta-api-30-openapi.yml#get-my-prices
+  - name: get_carrier_rates
+    description: Get carrier spread (per-carrier rate distribution) for an ocean corridor
+    source_operation: openapi/xeneta-api-30-openapi.yml#get-carrier-rates
+  - name: list_all_carriers_spread
+    description: List all carriers available in the carrier-spread dataset
+    source_operation: openapi/xeneta-api-30-openapi.yml#list-all-carriers-spread
+  - name: get_estimated_rates
+    description: Get estimated ocean freight rates for corridors without direct market data
+    source_operation: openapi/xeneta-api-30-openapi.yml#get-estimated-rates
+  - name: get_capacity_data
+    description: Get ocean capacity data for a corridor
+    source_operation: openapi/xeneta-api-30-openapi.yml#get-capacity-data
+  - name: list_all_corridors_capacity
+    description: List all corridors available in the capacity dataset
+    source_operation: openapi/xeneta-api-30-openapi.yml#list-all-corridors-capacity
+  - name: get_carbon_emissions_data
+    description: Get carbon (CO2) emissions data for an ocean corridor
+    source_operation: openapi/xeneta-api-30-openapi.yml#get-carbon-emissions-data
+  - name: list_all_carriers_emissions
+    description: List all carriers available in the carbon-emissions dataset
+    source_operation: openapi/xeneta-api-30-openapi.yml#list-all-carriers-emissions
+  - name: list_all_corridors_emissions
+    description: List all corridors available in the carbon-emissions dataset
+    source_operation: openapi/xeneta-api-30-openapi.yml#list-all-corridors-emissions
+  - name: get_schedule_reliability_data
+    description: Get carrier schedule-reliability data for an ocean corridor
+    source_operation: openapi/xeneta-api-30-openapi.yml#get-schedule-reliability-data
+  - name: list_all_carriers_reliability
+    description: List all carriers available in the schedule-reliability dataset
+    source_operation: openapi/xeneta-api-30-openapi.yml#list-all-carriers-reliability
+  - name: list_all_corridors_reliability
+    description: List all corridors available in the schedule-reliability dataset
+    source_operation: openapi/xeneta-api-30-openapi.yml#list-all-corridors-reliability

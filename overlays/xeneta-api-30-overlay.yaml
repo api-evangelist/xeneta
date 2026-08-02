@@ -1,0 +1,79 @@
+overlay: 1.0.0
+info:
+  title: API Evangelist enhancements for the Xeneta API v3.0
+  version: 1.0.0
+extends: openapi/xeneta-api-30-openapi.yml
+x-provenance:
+  generated: '2026-07-21'
+  method: generated
+  source: openapi/xeneta-api-30-openapi.yml
+actions:
+- target: $.info
+  update:
+    title: Xeneta API
+    description: >-
+      Ocean and air freight market intelligence API: market rates, contracted
+      my-prices, carrier spread, estimated rates, capacity, carbon emissions,
+      and schedule reliability, addressed by UN/LOCODE or geo-hierarchy
+      corridor and date range. Assembled by API Evangelist from the
+      per-operation OpenAPI slices published in the Xeneta API Reference
+      (help.xeneta.com/reference).
+    contact:
+      name: Xeneta
+      url: https://help.xeneta.com/reference/api
+    x-apievangelist:
+      provider: xeneta
+      artifacts:
+        authentication: authentication/xeneta-authentication.yml
+        conventions: conventions/xeneta-conventions.yml
+        errors: errors/xeneta-problem-types.yml
+        lifecycle: lifecycle/xeneta-lifecycle.yml
+        data-model: data-model/xeneta-data-model.yml
+- target: $.components.securitySchemes.sec0
+  update:
+    description: >-
+      Xeneta API key, generated in account settings
+      (https://app.xeneta.com/my-account/security), sent in the X-Auth header
+      over HTTPS only.
+- target: $.paths['/ocean/market-rates'].get
+  update:
+    tags: [Ocean, Market Rates]
+- target: $.paths['/air/market-rates'].get
+  update:
+    tags: [Air, Market Rates]
+- target: $.paths['/ocean/my-prices'].get
+  update:
+    tags: [Ocean, My Prices]
+- target: $.paths['/ocean/carrier-spread'].get
+  update:
+    tags: [Ocean, Carrier Spread]
+- target: $.paths['/ocean/carrier-spread/available-carriers'].get
+  update:
+    tags: [Ocean, Carrier Spread, Discovery]
+- target: $.paths['/ocean/estimated-rates'].get
+  update:
+    tags: [Ocean, Estimated Rates]
+- target: $.paths['/ocean/capacity'].get
+  update:
+    tags: [Ocean, Capacity]
+- target: $.paths['/ocean/capacity/available-corridors'].get
+  update:
+    tags: [Ocean, Capacity, Discovery]
+- target: $.paths['/ocean/carbon-emissions'].get
+  update:
+    tags: [Ocean, Carbon Emissions]
+- target: $.paths['/ocean/carbon-emissions/available-carriers'].get
+  update:
+    tags: [Ocean, Carbon Emissions, Discovery]
+- target: $.paths['/ocean/carbon-emissions/available-corridors'].get
+  update:
+    tags: [Ocean, Carbon Emissions, Discovery]
+- target: $.paths['/ocean/schedule-reliability'].get
+  update:
+    tags: [Ocean, Schedule Reliability]
+- target: $.paths['/ocean/schedule-reliability/available-carriers'].get
+  update:
+    tags: [Ocean, Schedule Reliability, Discovery]
+- target: $.paths['/ocean/schedule-reliability/available-corridors'].get
+  update:
+    tags: [Ocean, Schedule Reliability, Discovery]

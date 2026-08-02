@@ -1,0 +1,28 @@
+generated: '2026-07-21'
+method: searched
+source: https://help.xeneta.com/reference/versioning
+description: >-
+  Xeneta versions its API in the URL path (https://api.xeneta.com/{version}/).
+  v3.0 is the current version; the API Reference also lists v2.0 and v2.1.
+  Non-breaking changes ship as minor version increases; breaking changes get a
+  major version. Xeneta states older versions may be discontinued for
+  security, performance, or UX reasons, with advance notification and
+  migration assistance — no published sunset dates or Sunset/Deprecation
+  header (RFC 8594) support. No public status page was found (status.xeneta.com
+  does not resolve; xeneta.statuspage.io redirects to statuspage.io's
+  homepage), and no public SLA is documented.
+versioning:
+  scheme: uri-path
+  current: 'v3.0'
+  other_documented_versions: ['v2.0', 'v2.1']
+  docs: https://help.xeneta.com/reference/versioning
+deprecation:
+  policy_url: https://help.xeneta.com/reference/versioning
+  policy: >-
+    Older API versions may be discontinued; Xeneta commits to advance
+    notification and migration assistance. No fixed deprecation window or
+    sunset dates are published.
+  sunset_header: false
+sla: null
+status_page: null
+deprecated_operations: []

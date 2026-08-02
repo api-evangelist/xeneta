@@ -1,0 +1,20 @@
+generated: '2026-07-21'
+method: generated
+source: >-
+  Packaged Agent Skills generated from the Xeneta API v3.0 OpenAPI harvested
+  from help.xeneta.com/reference. Every step is grounded in an operationId
+  verified verbatim in ../openapi/xeneta-api-30-openapi.yml; cross-cutting
+  rules cite ../conventions/, ../errors/, and ../authentication/.
+skills:
+- file: xeneta-benchmark-ocean-rates.md
+  name: Benchmark ocean freight rates against the market
+  api: openapi/xeneta-api-30-openapi.yml
+  operations: [get-ocean-market-rates, get-my-prices]
+- file: xeneta-assess-carrier-performance.md
+  name: Assess carrier performance on a corridor
+  api: openapi/xeneta-api-30-openapi.yml
+  operations: [list-all-carriers-reliability, get-schedule-reliability-data, list-all-carriers-emissions, get-carbon-emissions-data, get-carrier-rates]
+- file: xeneta-air-market-rates.md
+  name: Pull air freight market rates
+  api: openapi/xeneta-api-30-openapi.yml
+  operations: [get-air-market-rates]

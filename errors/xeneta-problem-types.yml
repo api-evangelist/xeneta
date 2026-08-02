@@ -1,0 +1,45 @@
+generated: '2026-07-21'
+method: searched
+source: https://help.xeneta.com/reference/response-codes
+format: http-status
+description: >-
+  Xeneta API response codes as documented on the Response Codes reference
+  page. The API uses conventional HTTP status semantics (2xx success, 4xx
+  request issues, 5xx server errors); no RFC 9457 problem+json envelope is
+  documented, and the OpenAPI operation slices published in the reference
+  only describe 200 responses.
+problems:
+- status: 200
+  title: OK
+  detail: The request was processed successfully.
+- status: 204
+  title: No Content
+  detail: The request was processed successfully, but there was no data in the response.
+- status: 400
+  title: Bad Request
+  detail: The request failed due to missing or incorrect input parameters.
+  remediation: Check required query parameters (origin, destination, date_from, date_to, contract_length) and formats.
+- status: 401
+  title: Unauthorized
+  detail: The API key was either not provided or incorrect.
+  remediation: Send a valid API key in the X-Auth header over HTTPS.
+- status: 403
+  title: Forbidden
+  detail: The API key doesn't have permissions to access the requested resource.
+  remediation: Confirm your subscription includes the requested dataset, or contact Xeneta.
+- status: 422
+  title: Unprocessable Content
+  detail: The request was understood by the API server, but could not be processed correctly.
+- status: 429
+  title: Too Many Requests
+  detail: The API server received too many requests in a short span of time.
+  remediation: Back off and retry; API usage is metered with API credits.
+- status: 500
+  title: Internal Server Error
+  detail: Something went wrong on Xeneta's end.
+- status: 502
+  title: Bad Gateway
+  detail: Something went wrong on Xeneta's end.
+- status: 504
+  title: Gateway Timeout
+  detail: Something went wrong on Xeneta's end.

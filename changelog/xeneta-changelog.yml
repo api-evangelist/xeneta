@@ -1,0 +1,20 @@
+generated: '2026-07-21'
+method: searched
+source: https://help.xeneta.com/docs/coverage-updates
+scope: data-coverage
+description: >-
+  Xeneta publishes no dated API changelog (help.xeneta.com/changelog is 404);
+  API versions are tracked on the versioning page (v2.0, v2.1, v3.0). The
+  help center does maintain a dated "Coverage updates" log for the underlying
+  data platform, captured here. See lifecycle/xeneta-lifecycle.yml for the
+  version scheme.
+versioning:
+  scheme: major.minor in URL path
+  current: 'v3.0'
+entries:
+- date: '2026-04'
+  type: data-coverage
+  breaking: false
+  highlights:
+  - 87 new ports added across Oceania, Africa, Latin America, Europe, Asia, and North America
+  - New emerging hubs including Lekki (Nigeria), Chancay (Peru), and Otake (Japan), plus inland Indian locations

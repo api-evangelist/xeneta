@@ -1,0 +1,81 @@
+generated: '2026-07-21'
+method: derived
+source: openapi/xeneta-api-30-openapi.yml
+docs: https://help.xeneta.com/reference (object reference pages market-rates-object-ocean, my-prices-object, capacity-object, carrier-spread-object, carrier-emissions-object, corridor-emissions-object, carrier-reliability-object, corridor-reliability-object, estimated-rates-object, meta-object-*)
+description: >-
+  Entity graph of the Xeneta API v3.0 derived from the harvested OpenAPI
+  operation slices and response examples. The model is corridor-centric:
+  every dataset is addressed by an origin/destination Corridor (UN/LOCODE or
+  Xeneta geo-hierarchy region) and a date range, and every response carries a
+  Meta object echoing the resolved query. Discovery endpoints enumerate the
+  Carriers and Corridors available per dataset.
+entities:
+- name: Corridor
+  description: Origin/destination pair; locations are UN/LOCODEs (CNSGH, NLRTM) or geo-hierarchy regions (china_east_main, north_europe_main).
+  identifiers: [origin, destination]
+- name: Carrier
+  description: Ocean carrier appearing in carrier-spread, carbon-emissions, and schedule-reliability datasets.
+- name: MarketRate
+  description: Daily ocean or air market rate series (high/low/median percentiles by day) for a corridor and contract length.
+  fields: [market_rates_by_day, day, value]
+- name: MyPrice
+  description: The customer's own contracted prices for a corridor, benchmarked against the market.
+  fields: [my_prices]
+- name: EstimatedRate
+  description: Daily estimated rate series for corridors without sufficient direct market data.
+  fields: [estimated_rates_by_day]
+- name: CarrierSpread
+  description: Per-carrier daily rate distribution across a corridor.
+  fields: [carrier_spread_by_day]
+- name: Capacity
+  description: Daily ocean capacity series for a corridor.
+  fields: [capacity]
+- name: CarbonEmissions
+  description: CO2 emissions series, reported per carrier and per corridor.
+  fields: [carrier_carbon_emissions, corridor_carbon_emissions]
+- name: ScheduleReliability
+  description: Schedule-reliability series, reported per carrier and per corridor.
+  fields: [carrier_reliability_by_day, corridor_reliability_by_day]
+- name: Meta
+  description: Query-echo object on every response (resolved corridor, dates, filters); shape varies per dataset (meta-object-* reference pages).
+relationships:
+- from: MarketRate
+  to: Corridor
+  kind: belongs_to
+  via: origin + destination query parameters
+- from: MyPrice
+  to: Corridor
+  kind: belongs_to
+  via: origin + destination query parameters
+- from: EstimatedRate
+  to: Corridor
+  kind: belongs_to
+  via: origin + destination query parameters
+- from: Capacity
+  to: Corridor
+  kind: belongs_to
+  via: origin + destination query parameters
+- from: CarrierSpread
+  to: Carrier
+  kind: has_many
+  via: carrier entries in carrier_spread_by_day
+- from: CarbonEmissions
+  to: Carrier
+  kind: has_many
+  via: carrier_carbon_emissions
+- from: CarbonEmissions
+  to: Corridor
+  kind: belongs_to
+  via: corridor_carbon_emissions
+- from: ScheduleReliability
+  to: Carrier
+  kind: has_many
+  via: carrier_reliability_by_day
+- from: ScheduleReliability
+  to: Corridor
+  kind: belongs_to
+  via: corridor_reliability_by_day
+- from: Corridor
+  to: Carrier
+  kind: has_many
+  via: available-carriers discovery endpoints per dataset

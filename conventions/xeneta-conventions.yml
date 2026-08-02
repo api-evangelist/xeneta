@@ -1,0 +1,45 @@
+generated: '2026-07-21'
+method: searched
+source: https://help.xeneta.com/reference (api, authentication, versioning, response-codes pages) + openapi/xeneta-api-30-openapi.yml
+description: >-
+  Cross-cutting request/response semantics of the Xeneta API v3.0. It is a
+  read-only (all-GET) market-data API: REST over HTTPS with JSON responses,
+  API-key authentication, URL-path versioning, and date-range-bounded queries
+  instead of pagination. Requests are metered with API credits (the airline
+  data endpoints are documented as not consuming Xeneta API credits, implying
+  credit metering on the core API), and 429 is returned on bursts.
+base_url: https://api.xeneta.com/v3.0
+authentication:
+  style: apiKey
+  header: X-Auth
+  https_required: true
+  details: authentication/xeneta-authentication.yml
+idempotency:
+  supported: false
+  notes: >-
+    All 14 published operations are GET reads (idempotent by HTTP semantics);
+    no write operations and no Idempotency-Key contract are documented.
+pagination:
+  style: none
+  notes: >-
+    Results are bounded by required date_from/date_to query parameters (range
+    max 31 days) and origin/destination corridor parameters rather than
+    cursor or offset pagination.
+field_expansion: null
+metadata: null
+request_tracing: null
+versioning:
+  scheme: uri-path
+  current: 'v3.0'
+  details: lifecycle/xeneta-lifecycle.yml
+error_envelope:
+  format: http-status
+  details: errors/xeneta-problem-types.yml
+rate_limiting:
+  documented_status: 429
+  metering: API credits per call (airline data endpoints excluded)
+  published_limits: null
+locations:
+  scheme: UN/LOCODE or Xeneta geo-hierarchy region codes
+  ocean_geo_hierarchy: https://www.xeneta.com/hubfs/static/ocean-geo-hierarchy.xlsx
+  air_geo_hierarchy: https://www.xeneta.com/hubfs/static/air-geo-hierarchy.xlsx

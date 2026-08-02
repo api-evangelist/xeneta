@@ -1,0 +1,36 @@
+generated: '2026-07-21'
+method: searched
+source: https://help.xeneta.com/reference + https://www.xeneta.com/xeneta-data-security
+description: >-
+  Standards conformance asserted from the Xeneta API reference, the harvested
+  OpenAPI operation slices, and Xeneta's published security page. Xeneta is a
+  read-only market-data API authenticated with an API key; it claims ISO
+  27001:2022 certification for its ISMS.
+standards:
+- id: iso-27001
+  conforms: true
+  evidence: https://www.xeneta.com/xeneta-data-security announces ISO 27001:2022 certification
+- id: oauth2
+  conforms: false
+  evidence: API uses X-Auth apiKey header; no oauth2 securityScheme in the published spec
+- id: oidc
+  conforms: false
+  evidence: /.well-known/openid-configuration 404/403 on all hosts; no OIDC documented
+- id: rfc9457-problem-details
+  conforms: false
+  evidence: response-codes reference documents bare HTTP statuses; no application/problem+json
+- id: rfc8594-sunset-header
+  conforms: false
+  evidence: versioning page documents advance notification but no Sunset/Deprecation headers
+- id: pagination
+  conforms: false
+  evidence: endpoints are bounded by date-range query parameters (max 31 days); no cursor/offset pagination
+- id: idempotency-keys
+  conforms: false
+  evidence: all 14 published operations are GET reads; no Idempotency-Key contract documented
+- id: rfc9116-security-txt
+  conforms: false
+  evidence: /.well-known/security.txt returns 404 (www, help) / 403 (api, app)
+- id: un-locode
+  conforms: true
+  evidence: origin/destination parameters accept UN/LOCODEs (e.g. CNSGH, NLRTM) per the OpenAPI parameter docs

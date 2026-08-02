@@ -1,0 +1,21 @@
+generated: '2026-07-21'
+method: searched
+source: registry searches (npm, PyPI, Maven Central, NuGet, RubyGems, Packagist, crates.io) + github.com/xeneta
+description: >-
+  Xeneta publishes no first-party API client libraries. npm, PyPI, Maven
+  Central, NuGet, RubyGems, Packagist and crates.io were searched on
+  2026-07-21: the only first-party package is @xeneta/im-prop-types, an
+  Immutable.js PropTypes utility for React — not an API SDK. The github.com/
+  xeneta org contains hiring-assignment repos and one ML demo (LeadQualifier),
+  no client libraries. The Xeneta API (api.xeneta.com/v3.0) is consumed
+  directly over REST with an X-Auth API key.
+packages:
+  - language: javascript
+    registry: npm
+    name: "@xeneta/im-prop-types"
+    url: https://www.npmjs.com/package/@xeneta/im-prop-types
+    install: npm install @xeneta/im-prop-types
+    official: true
+    api_client: false
+    notes: Immutable.js PropType validators for React — internal front-end utility, not an API SDK.
+sdk_count: 0

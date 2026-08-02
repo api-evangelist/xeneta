@@ -1,0 +1,162 @@
+# Xeneta Help Center Documentation
+
+> Explore our collection of helpful articles to find answers to your questions and learn how to get the most out of Xeneta.
+
+## Guides
+- [Overview ](https://help.xeneta.com/docs/air-overview.md): Explore air freight markets, benchmark your performance, and manage tenders using Xeneta.
+- [Prepare and evaluate a tender](https://help.xeneta.com/docs/prepare-and-evaluate-a-tender.md): Prepare your tender, benchmark results, and analyze performance with market data.
+- [Analyze my performance](https://help.xeneta.com/docs/analyze-my-performance.md): Analyze your performance against the market to identify gaps and opportunities.
+- [Understand the market](https://help.xeneta.com/docs/understand-the-market-1.md): Understand air freight market movements, trends, and pricing dynamics.
+- [Using Market Tools ](https://help.xeneta.com/docs/using-market-tools.md): Step-by-step guides to help you use market tools and features effectively.
+- [Explore Air advanced](https://help.xeneta.com/docs/explore-air-advanced.md)
+- [Benchmark my rates ](https://help.xeneta.com/docs/benchmark-my-rates-1.md): Benchmark your rates to see how you perform against the air freight market.
+- [How-tos and tutorials](https://help.xeneta.com/docs/how-tos-air.md)
+- [How to navigate Market overview](https://help.xeneta.com/docs/how-to-navigate-market-overview-air.md)
+- [How to add trade lanes to watchlists](https://help.xeneta.com/docs/how-to-add-trade-lanes-to-watchlists-air.md)
+- [How to use Market metrics](https://help.xeneta.com/docs/how-to-use-market-metrics-air.md)
+- [How to use Market Benchmarks (newly updated)](https://help.xeneta.com/docs/how-to-use-market-benchmarks-air.md): Air Monitor
+- [How to navigate Performance overview](https://help.xeneta.com/docs/how-to-navigate-performance-overview-air.md)
+- [How to use Price benchmarks](https://help.xeneta.com/docs/how-to-use-price-benchmarks-air.md)
+- [How to provide your air rates to Xeneta](https://help.xeneta.com/docs/how-to-provide-your-rates-to-xeneta-air.md)
+- [How to use Tender benchmark tool](https://help.xeneta.com/docs/how-to-use-tender-benchmark-tool-air.md)
+- [How to view capacity and load factor data](https://help.xeneta.com/docs/how-to-view-capacity-and-load-factor-data.md)
+- [How to access airline reports](https://help.xeneta.com/docs/how-to-access-airline-reports.md)
+- [How to use "World" search](https://help.xeneta.com/docs/how-to-use-world-search.md)
+- [Concepts](https://help.xeneta.com/docs/concepts-air.md)
+- [Aggregation and geo-hierarchy](https://help.xeneta.com/docs/aggregation-and-geo-hierarchy-air.md)
+- [Service levels](https://help.xeneta.com/docs/service-levels.md)
+- [Rate structure and methodology | Air](https://help.xeneta.com/docs/rate-structure-and-methodology-air.md)
+- [Weight categories](https://help.xeneta.com/docs/weight-categories.md)
+- [Market metrics | Air](https://help.xeneta.com/docs/market-metrics-filters-air.md)
+- [Market segments | Air](https://help.xeneta.com/docs/market-segments-air.md)
+- [Contracts](https://help.xeneta.com/docs/contracts-air.md)
+- [Temperature-controlled cargo](https://help.xeneta.com/docs/temperature-controlled-cargo.md)
+- [Flat rates](https://help.xeneta.com/docs/flat-rates.md)
+- [Special cargo types](https://help.xeneta.com/docs/special-cargo-types.md): Airline selling rates and chargeable weight volumes
+- [Air Advanced](https://help.xeneta.com/docs/air-advanced.md)
+- [Regional hierarchy](https://help.xeneta.com/docs/air-advanced-regional-hierarchy.md)
+- [Analyze routes](https://help.xeneta.com/docs/air-advanced-analyze-routes.md)
+- [View markets](https://help.xeneta.com/docs/air-advanced-view-markets.md)
+- [Volume methodology](https://help.xeneta.com/docs/air-advanced-volume-methodology.md)
+- [Data policy](https://help.xeneta.com/docs/air-advanced-data-policy.md)
+- [Access levels](https://help.xeneta.com/docs/air-advanced-access-levels.md)
+- [Overview ](https://help.xeneta.com/docs/ocean-overview.md)
+- [Home page](https://help.xeneta.com/docs/home-page.md)
+- [Understand the market](https://help.xeneta.com/docs/understand-the-market.md): "What's happening in the ocean freight market?"
+- [Benchmark my rates](https://help.xeneta.com/docs/benchmark-my-rates.md): Understand how your rates compare to the market and where you can improve.
+- [Prepare & evaluate tender](https://help.xeneta.com/docs/prepare-evaluate-tender.md): Use these tools to prepare, analyze, and evaluate your tenders against the market.
+- [Plan my budget](https://help.xeneta.com/docs/plan-my-budget.md): Use these tools to forecast market rates and plan a more accurate freight budget.
+- [Submit my rates ](https://help.xeneta.com/docs/submit-rates-via-xeneta-managed-upload.md): Upload your rate data so it can be processed and compared against the market.
+- [Evaluate service performance ](https://help.xeneta.com/docs/evaluate-service-performance.md): Evaluate service reliability, delays, and disruptions to plan with more confidence.
+- [Understand Ocean concepts ](https://help.xeneta.com/docs/understand-ocean-concepts.md): Understand key ocean freight terms and metrics used across Xeneta.
+- [Market metrics](https://help.xeneta.com/docs/market-metrics-filters.md)
+- [Market segments](https://help.xeneta.com/docs/market-segments.md)
+- [Terminal handling charges](https://help.xeneta.com/docs/terminal-handling-charges.md)
+- [Estimated rates](https://help.xeneta.com/docs/estimated-rates.md)
+- [Geo-hierarchy methodology](https://help.xeneta.com/docs/geo-hierarchy-methodology.md)
+- [Rate structure and methodology](https://help.xeneta.com/docs/rate-structure-and-methodology.md)
+- [Volume](https://help.xeneta.com/docs/volume.md)
+- [Container types](https://help.xeneta.com/docs/container-types.md)
+- [Negative rates](https://help.xeneta.com/docs/negative-rates.md)
+- [Rates and contract validity](https://help.xeneta.com/docs/rates-and-contract-validity.md)
+- [Contract age](https://help.xeneta.com/docs/contract-age.md)
+- [Contract length](https://help.xeneta.com/docs/contract-length.md)
+- [Future rates](https://help.xeneta.com/docs/future-rates.md)
+- [Carbon emissions methodology](https://help.xeneta.com/docs/carbon-emissions-methodology.md)
+- [Exchange rates](https://help.xeneta.com/docs/exchange-rates.md)
+- [Coverage](https://help.xeneta.com/docs/coverage.md)
+- [ Coverage updates](https://help.xeneta.com/docs/coverage-updates.md): April 2026 — 87 new ports added
+- [Use market intelligence ](https://help.xeneta.com/docs/use-market-intelligence.md): Track market movements using Xeneta indexes and apply them to your contracts.
+- [Indexing](https://help.xeneta.com/docs/indexing-overview.md): Index-linked contracts keep your ocean freight rate aligned with the market.
+- [What is an index-linked contract?](https://help.xeneta.com/docs/what-is-an-index-linked-contract.md)
+- [How indexed rates are calculated](https://help.xeneta.com/docs/how-indexed-rates-are-calculated.md)
+- [What's included in an indexed rate](https://help.xeneta.com/docs/whats-included-in-an-indexed-rate.md)
+- [The Xeneta indices](https://help.xeneta.com/docs/the-xeneta-indices.md)
+- [Hedging and derivatives](https://help.xeneta.com/docs/hedging-and-derivatives.md)
+- [Index-Linked Contract Simulator](https://help.xeneta.com/docs/index-linked-contract-simulator.md)
+- [Index Contract Manager](https://help.xeneta.com/docs/index-contract-manager.md)
+- [Indexing glossary](https://help.xeneta.com/docs/indexing-glossary.md)
+- [Indexing FAQ](https://help.xeneta.com/docs/indexing-faq.md)
+- [Overview](https://help.xeneta.com/docs/rate-management.md)
+- [How to upload rates](https://help.xeneta.com/docs/how-to-upload-rates.md)
+- [Expiring rates](https://help.xeneta.com/docs/expiring-rates.md)
+- [Data imports and volume](https://help.xeneta.com/docs/data-imports-and-volume.md)
+- [How we process your rates](https://help.xeneta.com/docs/how-we-process-your-rates.md)
+- [Integrated Rate Management](https://help.xeneta.com/docs/integrated-rate-management.md): Product Overview
+- [Rates](https://help.xeneta.com/docs/rates.md)
+- [Rate Details](https://help.xeneta.com/docs/rate-details-1.md)
+- [Summary Tiles](https://help.xeneta.com/docs/snapshot-of-today.md): Rate details
+- [Rate Adjustment Graph](https://help.xeneta.com/docs/rate-adjustment-graph.md): Rate details
+- [ Rate Adjustment Table](https://help.xeneta.com/docs/rate-adjustment-table.md): Rate details
+- [Contracts](https://help.xeneta.com/docs/contracts.md)
+- [Audit Log](https://help.xeneta.com/docs/audit-log.md)
+- [Exports](https://help.xeneta.com/docs/exports.md)
+- [How-tos and tutorials](https://help.xeneta.com/docs/how-tos-and-tutorials.md)
+- [How to upload your rate sheet](https://help.xeneta.com/docs/how-to-upload-your-rate-sheet.md)
+- [How to correct validation issues](https://help.xeneta.com/docs/how-to-correct-validation-issues-1.md)
+- [How to adjust your rates](https://help.xeneta.com/docs/how-to-adjust-your-rates.md)
+- [Overview](https://help.xeneta.com/docs/accounts-overview.md)
+- [Manage access ](https://help.xeneta.com/docs/manage-access.md): Manage users, security settings, and preferences.
+- [Security ](https://help.xeneta.com/docs/security.md): Manage your account security and authentication settings.
+- [Settings & Preferences](https://help.xeneta.com/docs/settings-preferences.md): Manage your personal preferences and technical setup.
+- [Session duration and automatic logout](https://help.xeneta.com/docs/session-and-logout.md)
+- [Supported browsers](https://help.xeneta.com/docs/supported-browsers.md)
+- [Configure multi-factor authentication](https://help.xeneta.com/docs/configure-mfa.md)
+- [Introduction](https://help.xeneta.com/docs/help-guides-intro.md): Welcome to Xeneta's help guides.
+- [Ocean Glossary](https://help.xeneta.com/docs/glossary.md)
+- [Air Glossary](https://help.xeneta.com/docs/glossary-air.md)
+- [Get started](https://help.xeneta.com/docs/get-started.md): New to Xeneta? Start here to understand the platform and how to use it.
+- [Overview](https://help.xeneta.com/docs/concepts-overview.md): Learn the core concepts, definitions, and methodologies used across Xeneta.
+- [Understand market structure ](https://help.xeneta.com/docs/understand-market-structure.md): Understand how Xeneta defines markets, regions, and segments.
+- [Understand core metrics ](https://help.xeneta.com/docs/understand-core-metrics.md): Understand how Xeneta calculates metrics, benchmarks, and rate structures.
+- [Understand contracts](https://help.xeneta.com/docs/understand-contracts.md): Understand how contracts are defined, measured, and compared in Xeneta.
+- [Financial & currency](https://help.xeneta.com/docs/financial-currency.md): Understand how currency and exchange rates affect pricing and benchmarks.
+
+## API Reference
+- [Overview](https://help.xeneta.com/reference/api.md)
+- [Authentication](https://help.xeneta.com/reference/authentication.md)
+- [Response codes](https://help.xeneta.com/reference/response-codes.md)
+- [Versioning](https://help.xeneta.com/reference/versioning.md)
+- [Market rates](https://help.xeneta.com/reference/market-rates-ocean.md)
+- [The market_rates_by_day object](https://help.xeneta.com/reference/market-rates-object-ocean.md)
+- [The meta object](https://help.xeneta.com/reference/meta-object-ocean-rates.md)
+- [Get market rates](https://help.xeneta.com/reference/get-ocean-market-rates.md): Returns ocean freight market rates within the specified parameters.
+- [Estimated rates](https://help.xeneta.com/reference/estimated-rates.md)
+- [The estimated_rates_by_day object](https://help.xeneta.com/reference/estimated-rates-object.md)
+- [The meta object](https://help.xeneta.com/reference/meta-object-estimated-rates.md)
+- [Get estimated rates](https://help.xeneta.com/reference/get-estimated-rates.md): Returns estimated rate within the specified parameters on the port-to-port level only.
+- [My prices](https://help.xeneta.com/reference/my-prices.md)
+- [The my_prices object](https://help.xeneta.com/reference/my-prices-object.md)
+- [The meta object](https://help.xeneta.com/reference/meta-object-my-prices.md)
+- [Get my prices](https://help.xeneta.com/reference/get-my-prices.md): Returns your imported rates for a specific port pair.
+- [Carrier rates](https://help.xeneta.com/reference/carrier-spread.md)
+- [The carrier_spread_by_day object](https://help.xeneta.com/reference/carrier-spread-object.md)
+- [The meta object](https://help.xeneta.com/reference/meta-object-carrier-spread.md)
+- [List all carriers](https://help.xeneta.com/reference/list-all-carriers-spread.md): Returns `available_carriers` object with a list of all carriers available for Carrier Spread.
+- [Get carrier rates](https://help.xeneta.com/reference/get-carrier-rates.md): Returns freight rates for the requested [carrier](list-all-carriers-spread).
+- [Schedule reliability](https://help.xeneta.com/reference/schedule-reliability.md)
+- [The carrier_reliability_by_day object](https://help.xeneta.com/reference/carrier-reliability-object.md)
+- [The corridor_reliability_by_day object](https://help.xeneta.com/reference/corridor-reliability-object.md)
+- [The meta object](https://help.xeneta.com/reference/meta-object-schedule-reliability.md)
+- [List all carriers](https://help.xeneta.com/reference/list-all-carriers-reliability.md): Returns `available_carriers` object with a list of all carriers availble for Schedule Reliability.
+- [Get schedule reliability data](https://help.xeneta.com/reference/get-schedule-reliability-data.md): Returns reliability data for the requested corridor and [carrier](list-all-carriers-reliability).
+- [Capacity](https://help.xeneta.com/reference/capacity.md)
+- [The capacity object](https://help.xeneta.com/reference/capacity-object.md)
+- [The meta object](https://help.xeneta.com/reference/meta-object-capacity.md)
+- [Get capacity data](https://help.xeneta.com/reference/get-capacity-data.md): Returns ocean market capacity data for the requested corridor.
+- [Carbon emissions](https://help.xeneta.com/reference/carbon-emissions.md)
+- [The carrier_carbon_emissions object](https://help.xeneta.com/reference/carrier-emissions-object.md)
+- [The corridor_carbon_emissions object](https://help.xeneta.com/reference/corridor-emissions-object.md)
+- [The meta object](https://help.xeneta.com/reference/meta-object-emissions.md)
+- [List all carriers](https://help.xeneta.com/reference/list-all-carriers-emissions.md): Returns `available_carriers` object with a list of all carriers availble for Carbon Emissions.
+- [List all corridors](https://help.xeneta.com/reference/list-all-corridors-emissions.md): Returns `available_corridors` object with a list of all corridors where Xeneta has Carbon Emissions data.
+- [Get carbon emissions data](https://help.xeneta.com/reference/get-carbon-emissions-data.md): Returns carbon emissions index score for the requested [corridor](list-all-corridors-emissions) and [carrier](list-all-carriers-emissions).
+- [Market rates](https://help.xeneta.com/reference/market-rates-air.md)
+- [The market_rates_by_day object](https://help.xeneta.com/reference/market-rates-object-air.md)
+- [The meta object](https://help.xeneta.com/reference/meta-object-air-rates.md)
+- [Get market rates](https://help.xeneta.com/reference/get-air-market-rates.md): Returns air freight market rates within the specified parameters.
+- [Overview](https://help.xeneta.com/reference/airline-overview.md)
+- [Authentication](https://help.xeneta.com/reference/airline-authentication.md)
+- [Report types](https://help.xeneta.com/reference/airline-report-types.md)
+- [Endpoints](https://help.xeneta.com/reference/airline-endpoints.md)
+- [Usage examples](https://help.xeneta.com/reference/airline-usage-examples.md)

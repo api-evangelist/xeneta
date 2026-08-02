@@ -1,0 +1,35 @@
+generated: '2026-07-21'
+method: searched
+source: openapi/xeneta-api-30-openapi.yml
+docs: https://help.xeneta.com/reference/authentication
+description: >-
+  The Xeneta API authenticates every request with an API key passed in the
+  X-Auth header over HTTPS only — plain HTTP and unauthenticated requests are
+  rejected. Keys are self-service generated in the Security section of the
+  Xeneta account settings (https://app.xeneta.com/my-account/security) for
+  accounts with API access. The separate airline reports API (Selfie) uses
+  session-cookie authentication: POST username/password to
+  /api/selfie/rest_auth/login on the airline host.
+summary:
+  types:
+  - apiKey
+  - sessionCookie
+  api_key_in:
+  - header
+schemes:
+- name: sec0
+  type: apiKey
+  in: header
+  parameter: X-Auth
+  key_source: https://app.xeneta.com/my-account/security
+  https_required: true
+  sources:
+  - openapi/xeneta-api-30-openapi.yml
+  - https://help.xeneta.com/reference/authentication
+- name: airline-session
+  type: sessionCookie
+  api: Xeneta Airline Data API
+  login_endpoint: POST https://{airline}.useselfie.com/api/selfie/rest_auth/login
+  credentials: [username, password]
+  sources:
+  - https://help.xeneta.com/reference/airline-authentication
