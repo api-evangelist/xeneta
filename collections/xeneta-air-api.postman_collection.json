@@ -1,0 +1,211 @@
+{
+  "item": [
+    {
+      "id": "0f1fc849-ab8b-4484-bec2-fd1119a73e00",
+      "name": "Air",
+      "description": {
+        "content": "",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "a42b457f-9561-4544-bd68-b4a56cbd9684",
+          "name": "Get market rates",
+          "request": {
+            "name": "Get market rates",
+            "description": {
+              "content": "Returns air freight market rates within the specified parameters.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "air",
+                "market-rates"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "origin",
+                  "value": "PVG",
+                  "description": "(Required) Defines the origin location of the requested market rate data. Can be either an IATA airport code or a region as defined in Xeneta's [geo-hierarchy](https://www.xeneta.com/hubfs/2025-air-geo/xeneta-air-geo.html). For example, `PVG` or `east_china_main`."
+                },
+                {
+                  "disabled": false,
+                  "key": "destination",
+                  "value": "FRA",
+                  "description": "(Required) Defines the destination location of the requested market rate data. Can be either an IATA airport code or a region as defined in Xeneta's [geo-hierarchy](https://www.xeneta.com/hubfs/2025-air-geo/xeneta-air-geo.html). For example, `FRA` or `north_europe_main`."
+                },
+                {
+                  "disabled": false,
+                  "key": "date_from",
+                  "value": "2023-02-01",
+                  "description": "(Required) Defines the start date of the date range for the requested market rates in the `YYYY-MM-DD` format. The total range cannot exceed 31 days."
+                },
+                {
+                  "disabled": false,
+                  "key": "date_to",
+                  "value": "2023-02-05",
+                  "description": "(Required) Defines the end date of the date range for the requested market rates in the `YYYY-MM-DD` format. The total range cannot exceed 31 days."
+                },
+                {
+                  "disabled": false,
+                  "key": "contract_length",
+                  "value": "long",
+                  "description": "(Required) Defines the type of contract for the requested market rate data. `long` is the only accepted value."
+                },
+                {
+                  "disabled": false,
+                  "key": "contracted_within",
+                  "value": "all",
+                  "description": "(Required) Defines the maximum age of the contracts to be included in the requested market rate data, relative to each day. Accepted values include `all` and `3months`."
+                },
+                {
+                  "disabled": false,
+                  "key": "weight_bracket",
+                  "value": "greater_than_500kg",
+                  "description": "(Required) Defines the weight category of the requested rate data. Accepted values are `less_than_45kg`, `greater_than_45kg`, `greater_than_200kg`, `greater_than_500kg`, and `greater_than_1000kg`."
+                },
+                {
+                  "disabled": false,
+                  "key": "service_level",
+                  "value": "mid_tier",
+                  "description": "(Required) Defines the service level of the requested rate data. Accepted values are `upper_tier`, `mid_tier`, `lower_tier`, `lower_and_mid_tier`, and `passive`."
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "f72be48d-121c-45e2-8694-fc44b8cbcb18",
+              "name": "200",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "air",
+                    "market-rates"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "origin",
+                      "value": "PVG"
+                    },
+                    {
+                      "key": "destination",
+                      "value": "FRA"
+                    },
+                    {
+                      "key": "date_from",
+                      "value": "2023-02-01"
+                    },
+                    {
+                      "key": "date_to",
+                      "value": "2023-02-05"
+                    },
+                    {
+                      "key": "contract_length",
+                      "value": "long"
+                    },
+                    {
+                      "key": "contracted_within",
+                      "value": "all"
+                    },
+                    {
+                      "key": "weight_bracket",
+                      "value": "greater_than_500kg"
+                    },
+                    {
+                      "key": "service_level",
+                      "value": "mid_tier"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "X-Auth",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "\"{\\n  \\\"meta\\\": {\\n    \\\"actual_destination\\\": {\\n      \\\"allow_aggregation\\\": true,\\n      \\\"location\\\": \\\"FRA\\\",\\n      \\\"name\\\": \\\"Frankfurt (FRA)\\\",\\n      \\\"type\\\": \\\"airport\\\",\\n      \\\"geo_level\\\": 5\\n    },\\n    \\\"actual_origin\\\": {\\n      \\\"allow_aggregation\\\": true,\\n      \\\"location\\\": \\\"PVG\\\",\\n      \\\"name\\\": \\\"Shanghai (PVG)\\\",\\n      \\\"type\\\": \\\"airport\\\",\\n      \\\"geo_level\\\": 7\\n    },\\n    \\\"asked_origin\\\": {\\n      \\\"allow_aggregation\\\": true,\\n      \\\"location\\\": \\\"PVG\\\",\\n      \\\"name\\\": \\\"Shanghai (PVG)\\\",\\n      \\\"type\\\": \\\"airport\\\",\\n      \\\"geo_level\\\": 7\\n    },\\n    \\\"asked_destination\\\": {\\n      \\\"allow_aggregation\\\": true,\\n      \\\"location\\\": \\\"FRA\\\",\\n      \\\"name\\\": \\\"Frankfurt (FRA)\\\",\\n      \\\"type\\\": \\\"airport\\\",\\n      \\\"geo_level\\\": 5\\n    },\\n    \\\"aggregation_allowed\\\": true,\\n    \\\"rate_quality\\\": \\\"30+\\\"\\n  },\\n  \\\"market_rates_by_day\\\": {\\n    \\\"low\\\": [\\n      {\\n        \\\"day\\\": \\\"2023-02-01\\\",\\n        \\\"value\\\": 3.54\\n      },\\n      {\\n        \\\"day\\\": \\\"2023-02-02\\\",\\n        \\\"value\\\": 3.54\\n      },\\n      {\\n        \\\"day\\\": \\\"2023-02-03\\\",\\n        \\\"value\\\": 3.54\\n      },\\n      {\\n        \\\"day\\\": \\\"2023-02-04\\\",\\n        \\\"value\\\": 3.54\\n      },\\n      {\\n        \\\"day\\\": \\\"2023-02-05\\\",\\n        \\\"value\\\": 3.54\\n      }\\n    ],\\n    \\\"mean\\\": [\\n      {\\n        \\\"day\\\": \\\"2023-02-01\\\",\\n        \\\"value\\\": 5.18\\n      },\\n      {\\n        \\\"day\\\": \\\"2023-02-02\\\",\\n        \\\"value\\\": 5.18\\n      },\\n      {\\n        \\\"day\\\": \\\"2023-02-03\\\",\\n        \\\"value\\\": 5.17\\n      },\\n      {\\n        \\\"day\\\": \\\"2023-02-04\\\",\\n        \\\"value\\\": 5.17\\n      },\\n      {\\n        \\\"day\\\": \\\"2023-02-05\\\",\\n        \\\"value\\\": 5.17\\n      }\\n    ],\\n    \\\"high\\\": [\\n      {\\n        \\\"day\\\": \\\"2023-02-01\\\",\\n        \\\"value\\\": 6.68\\n      },\\n      {\\n        \\\"day\\\": \\\"2023-02-02\\\",\\n        \\\"value\\\": 6.68\\n      },\\n      {\\n        \\\"day\\\": \\\"2023-02-03\\\",\\n        \\\"value\\\": 6.68\\n      },\\n      {\\n        \\\"day\\\": \\\"2023-02-04\\\",\\n        \\\"value\\\": 6.68\\n      },\\n      {\\n        \\\"day\\\": \\\"2023-02-05\\\",\\n        \\\"value\\\": 6.68\\n      }\\n    ],\\n    \\\"rate_quality\\\": [\\n      {\\n        \\\"day\\\": \\\"2023-02-01\\\",\\n        \\\"value\\\": \\\"30+\\\"\\n      },\\n      {\\n        \\\"day\\\": \\\"2023-02-02\\\",\\n        \\\"value\\\": \\\"30+\\\"\\n      },\\n      {\\n        \\\"day\\\": \\\"2023-02-03\\\",\\n        \\\"value\\\": \\\"30+\\\"\\n      },\\n      {\\n        \\\"day\\\": \\\"2023-02-04\\\",\\n        \\\"value\\\": \\\"30+\\\"\\n      },\\n      {\\n        \\\"day\\\": \\\"2023-02-05\\\",\\n        \\\"value\\\": \\\"30+\\\"\\n      }\\n    ]\\n  }\\n}\"",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://api.xeneta.com/v3.0",
+      "key": "baseUrl"
+    }
+  ],
+  "auth": {
+    "type": "apikey",
+    "apikey": [
+      {
+        "key": "key",
+        "value": "X-Auth"
+      },
+      {
+        "key": "value",
+        "value": "{{apiKey}}"
+      },
+      {
+        "key": "in",
+        "value": "header"
+      }
+    ]
+  },
+  "info": {
+    "_postman_id": "dccc9e27-fc31-498b-9cf5-b12c567f5864",
+    "name": "xeneta-api-30 Air API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "",
+      "type": "text/plain"
+    }
+  }
+}

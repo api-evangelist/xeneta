@@ -1,0 +1,87 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "xeneta-api-30 Air API",
+    "version": "3.0"
+  },
+  "request": {
+    "auth": {
+      "type": "apikey",
+      "key": "X-Auth",
+      "value": "{{X-Auth}}",
+      "placement": "header"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Air",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Get market rates",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.xeneta.com/v3.0/air/market-rates",
+            "params": [
+              {
+                "name": "origin",
+                "value": "",
+                "type": "query",
+                "description": "Defines the origin location of the requested market rate data. Can be either an IATA airport code or a region as defined in Xeneta's [geo-hierarchy](https://www.xeneta.com/hubfs/2025-air-geo/xeneta-air-geo.html). For example, `PVG` or `east_china_main`."
+              },
+              {
+                "name": "destination",
+                "value": "",
+                "type": "query",
+                "description": "Defines the destination location of the requested market rate data. Can be either an IATA airport code or a region as defined in Xeneta's [geo-hierarchy](https://www.xeneta.com/hubfs/2025-air-geo/xeneta-air-geo.html). For example, `FRA` or `north_europe_main`."
+              },
+              {
+                "name": "date_from",
+                "value": "",
+                "type": "query",
+                "description": "Defines the start date of the date range for the requested market rates in the `YYYY-MM-DD` format. The total range cannot exceed 31 days."
+              },
+              {
+                "name": "date_to",
+                "value": "",
+                "type": "query",
+                "description": "Defines the end date of the date range for the requested market rates in the `YYYY-MM-DD` format. The total range cannot exceed 31 days."
+              },
+              {
+                "name": "contract_length",
+                "value": "",
+                "type": "query",
+                "description": "Defines the type of contract for the requested market rate data. `long` is the only accepted value."
+              },
+              {
+                "name": "contracted_within",
+                "value": "",
+                "type": "query",
+                "description": "Defines the maximum age of the contracts to be included in the requested market rate data, relative to each day. Accepted values include `all` and `3months`."
+              },
+              {
+                "name": "weight_bracket",
+                "value": "",
+                "type": "query",
+                "description": "Defines the weight category of the requested rate data. Accepted values are `less_than_45kg`, `greater_than_45kg`, `greater_than_200kg`, `greater_than_500kg`, and `greater_than_1000kg`."
+              },
+              {
+                "name": "service_level",
+                "value": "",
+                "type": "query",
+                "description": "Defines the service level of the requested rate data. Accepted values are `upper_tier`, `mid_tier`, `lower_tier`, `lower_and_mid_tier`, and `passive`."
+              }
+            ]
+          },
+          "docs": "Returns air freight market rates within the specified parameters."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

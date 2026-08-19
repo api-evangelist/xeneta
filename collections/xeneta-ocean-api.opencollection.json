@@ -1,0 +1,453 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "xeneta-api-30 Air Ocean API",
+    "version": "3.0"
+  },
+  "request": {
+    "auth": {
+      "type": "apikey",
+      "key": "X-Auth",
+      "value": "{{X-Auth}}",
+      "placement": "header"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Ocean",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Get market rates",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.xeneta.com/v3.0/ocean/market-rates",
+            "params": [
+              {
+                "name": "origin",
+                "value": "",
+                "type": "query",
+                "description": "Defines the origin location of the requested market rate data. Can be either a UN/LOCODE or a region as defined in Xeneta's [geo-hierarchy](https://www.xeneta.com/hubfs/2025-ocean-geo/xeneta-ocean-geo.html). For example, `CNSGH` or `china_east_main`."
+              },
+              {
+                "name": "destination",
+                "value": "",
+                "type": "query",
+                "description": "Defines the destination location of the requested market rate data. Can be either a UN/LOCODE or a region as defined in Xeneta's [geo-hierarchy](https://www.xeneta.com/hubfs/2025-ocean-geo/xeneta-ocean-geo.html). For example, `NLRTM` or `north_europe_main`."
+              },
+              {
+                "name": "date_from",
+                "value": "",
+                "type": "query",
+                "description": "Defines the start date of the date range for the requested market rates in the `YYYY-MM-DD` format. The total range cannot exceed 31 days."
+              },
+              {
+                "name": "date_to",
+                "value": "",
+                "type": "query",
+                "description": "Defines the end date of the date range for the requested market rates in the `YYYY-MM-DD` format. The total range cannot exceed 31 days.<br><br>Using a future date will return contracted rates that are valid up to 10 days (when `contract_length` is set to `short`) or 3 months (when `contract_length` is set to `long`) beyond the current date."
+              },
+              {
+                "name": "contract_length",
+                "value": "",
+                "type": "query",
+                "description": "Defines the type of contract for the requested market rate data. Accepted values are `long` or `short`."
+              },
+              {
+                "name": "contracted_within",
+                "value": "",
+                "type": "query",
+                "description": "Defines the maximum age of the contracts to be included in the requested market rate data, relative to each day. Accepted values include `all`, `3months` and `6months`. Using any value other than `all` when `contract_length` is set to `short` will return an error."
+              },
+              {
+                "name": "container_type",
+                "value": "",
+                "type": "query",
+                "description": "Defines the container type of the requested market rate data. Accepted values include `20DC`, `20RE`, `20TK`, `40DC`, `40RH` and `40HC`."
+              },
+              {
+                "name": "thc_methodology",
+                "value": "",
+                "type": "query",
+                "description": "Defines whether the requested market rate data should include the terminal handling charge. Accepted values include `meth`, `othc`, `dthc`, `none` and `both`. Selecting `meth` will use Xeneta's default [methodology](https://help.xeneta.com/docs/terminal-handling-charges) for the requested `origin` and `destination`."
+              },
+              {
+                "name": "bump_up",
+                "value": "",
+                "type": "query",
+                "description": "Defines whether to allow rates from larger geographic regions in the response if there is not enough data for the requested `origin` and `destination`. Using `false` when there is no rate data available for the requested `origin` and `destination` will return an error."
+              }
+            ]
+          },
+          "docs": "Returns ocean freight market rates within the specified parameters."
+        },
+        {
+          "info": {
+            "name": "Get estimated rates",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.xeneta.com/v3.0/ocean/estimated-rates",
+            "params": [
+              {
+                "name": "origin",
+                "value": "",
+                "type": "query",
+                "description": "Defines the origin port of the requested estimated rate data. Only UN/LOCODE values matching Xeneta's [geo-hierarchy](https://www.xeneta.com/hubfs/2025-ocean-geo/xeneta-ocean-geo.html) are supported, anything else will result in an error or an empty response."
+              },
+              {
+                "name": "destination",
+                "value": "",
+                "type": "query",
+                "description": "Defines the destination port of the requested estimated rate data. Only UN/LOCODE values matching Xeneta's [geo-hierarchy](https://www.xeneta.com/hubfs/2025-ocean-geo/xeneta-ocean-geo.html) are supported, anything else will result in an error or an empty response."
+              },
+              {
+                "name": "date_from",
+                "value": "",
+                "type": "query",
+                "description": "Defines the start date of the date range for the requested estimated rates in the `YYYY-MM-DD` format."
+              },
+              {
+                "name": "date_to",
+                "value": "",
+                "type": "query",
+                "description": "Defines the end date of the date range for the requested estimated rates in the `YYYY-MM-DD` format. The total range cannot exceed 31 days."
+              },
+              {
+                "name": "contract_length",
+                "value": "",
+                "type": "query",
+                "description": "Defines the type of contract for the requested estimated rate data. Accepted values are `long` or `short`. The total range cannot exceed 31 days."
+              },
+              {
+                "name": "contracted_within",
+                "value": "",
+                "type": "query",
+                "description": "Defines the maximum age of the contracts to be included in the requested estimated rate data, relative to each day. Accepted values include `all`, `3months` and `6months`. Using any value other than `all` when `contract_length` is set to `short` will return an error."
+              },
+              {
+                "name": "container_type",
+                "value": "",
+                "type": "query",
+                "description": "Defines the container type of the requested market rate data. Accepted values include `20DC`, `20RE`, `20TK`, `40DC`, `40RH` and `40HC`."
+              },
+              {
+                "name": "thc_methodology",
+                "value": "",
+                "type": "query",
+                "description": "Defines whether the requested market rate data should include the terminal handling charge. Accepted values include `meth`, `othc`, `dthc`, `none` and `both`. Selecting `meth` will use Xeneta's default [methodology](https://help.xeneta.com/docs/terminal-handling-charges) for the requested `origin` and `destination`."
+              }
+            ]
+          },
+          "docs": "Returns estimated rate within the specified parameters on the port-to-port level only."
+        },
+        {
+          "info": {
+            "name": "Get my prices",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.xeneta.com/v3.0/ocean/my-prices",
+            "params": [
+              {
+                "name": "origin",
+                "value": "",
+                "type": "query",
+                "description": "Defines the origin port of your requested imported rates. Only UN/LOCODE values matching Xeneta's [geo-hierarchy](https://www.xeneta.com/hubfs/2025-ocean-geo/xeneta-ocean-geo.html) are supported. For example, `CNSGH`."
+              },
+              {
+                "name": "destination",
+                "value": "",
+                "type": "query",
+                "description": "Defines the destination port of your requested imported rates. Only UN/LOCODE values matching Xeneta's [geo-hierarchy](https://www.xeneta.com/hubfs/2025-ocean-geo/xeneta-ocean-geo.html) are supported. For example, `NLRTM`."
+              },
+              {
+                "name": "date_from",
+                "value": "",
+                "type": "query",
+                "description": "Defines the start date of the date range for your requested imported rates in the `YYYY-MM-DD` format. The total range cannot exceed 31 days."
+              },
+              {
+                "name": "date_to",
+                "value": "",
+                "type": "query",
+                "description": "Defines the end date of the date range for your requested imported rates in the `YYYY-MM-DD` format. The total range cannot exceed 31 days."
+              },
+              {
+                "name": "container_type",
+                "value": "",
+                "type": "query",
+                "description": "Defines the container type of your requested imported rates. Accepted values include `20DC`, `20RE`, `20TK`, `40DC`, `40RH` and `40HC`."
+              },
+              {
+                "name": "thc_methodology",
+                "value": "",
+                "type": "query",
+                "description": "Defines whether your requested imported rates should include the terminal handling charge. Accepted values include `meth`, `othc`, `dthc`, `none` and `both`. Selecting `meth` will use Xeneta's default [methodology](https://help.xeneta.com/docs/terminal-handling-charges) for the requested `origin` and `destination`."
+              }
+            ]
+          },
+          "docs": "Returns your imported rates for a specific port pair."
+        },
+        {
+          "info": {
+            "name": "List all carriers",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.xeneta.com/v3.0/ocean/carrier-spread/available-carriers"
+          },
+          "docs": "Returns `available_carriers` object with a list of all carriers available for Carrier Spread."
+        },
+        {
+          "info": {
+            "name": "Get carrier rates",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.xeneta.com/v3.0/ocean/carrier-spread",
+            "params": [
+              {
+                "name": "origin",
+                "value": "",
+                "type": "query",
+                "description": "Defines the origin location of the requested carrier rate data. Can be either a UN/LOCODE or a region as defined in Xeneta's [geo-hierarchy](https://www.xeneta.com/hubfs/2025-ocean-geo/xeneta-ocean-geo.html). For example, `CNSGH` or `china_east_main`."
+              },
+              {
+                "name": "destination",
+                "value": "",
+                "type": "query",
+                "description": "Defines the destination location of the requested carrier rate data. Can be either a UN/LOCODE or a region as defined in Xeneta's [geo-hierarchy](https://www.xeneta.com/hubfs/2025-ocean-geo/xeneta-ocean-geo.html). For example, `NLRTM` or `north_europe_main`."
+              },
+              {
+                "name": "date_from",
+                "value": "",
+                "type": "query",
+                "description": "Defines the start date of the date range for the requested carrier rates in the `YYYY-MM-DD` format. The total range cannot exceed 31 days."
+              },
+              {
+                "name": "date_to",
+                "value": "",
+                "type": "query",
+                "description": "Defines the end date of the date range for the requested carrier rates in the `YYYY-MM-DD` format. The total range cannot exceed 31 days."
+              },
+              {
+                "name": "carrier_slug",
+                "value": "",
+                "type": "query",
+                "description": "Defines the [carrier](ref:list-all-carriers-spread) whose rates to request."
+              },
+              {
+                "name": "contract_length",
+                "value": "",
+                "type": "query",
+                "description": "Defines the type of contract for the requested carrier rate data. Accepted values are `long` or `short`."
+              },
+              {
+                "name": "contracted_within",
+                "value": "",
+                "type": "query",
+                "description": "Defines the maximum age of the contracts to be included in the requested carrier rate data, relative to each day. Accepted values include `all`, `3months` and `6months`. Using any value other than `all` when `contract_length` is set to `short` will return an error."
+              },
+              {
+                "name": "container_type",
+                "value": "",
+                "type": "query",
+                "description": "Defines the container type of the requested carrier rate data. Accepted values include `20DC`, `20RE`, `20TK`, `40DC`, `40RH` and `40HC`."
+              },
+              {
+                "name": "thc_methodology",
+                "value": "",
+                "type": "query",
+                "description": "Defines whether the requested carrier rate data should include the terminal handling charge. Accepted values include `meth`, `othc`, `dthc`, `none` and `both`. Selecting `meth` will use Xeneta's default [methodology](https://help.xeneta.com/docs/terminal-handling-charges) for the requested origin and destination."
+              }
+            ]
+          },
+          "docs": "Returns freight rates for the requested [carrier](ref:list-all-carriers-spread)."
+        },
+        {
+          "info": {
+            "name": "List all carriers",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.xeneta.com/v3.0/ocean/schedule-reliability/available-carriers"
+          },
+          "docs": "Returns `available_carriers` object with a list of all carriers availble for Schedule Reliability."
+        },
+        {
+          "info": {
+            "name": "List all corridors",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.xeneta.com/v3.0/ocean/schedule-reliability/available-corridors"
+          },
+          "docs": "Returns `available_corridors` object with a list of all corridors where Xeneta has Schedule Reliability data."
+        },
+        {
+          "info": {
+            "name": "Get schedule reliability data",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.xeneta.com/v3.0/ocean/schedule-reliability",
+            "params": [
+              {
+                "name": "origin",
+                "value": "",
+                "type": "query",
+                "description": "Defines the origin location of the requested schedule reliability datathat must match Xeneta's [geo-hierarchy](https://www.xeneta.com/hubfs/2025-ocean-geo/xeneta-ocean-geo.html). For example, `north_europe_main`."
+              },
+              {
+                "name": "destination",
+                "value": "",
+                "type": "query",
+                "description": "Defines the destination location of the requested schedule reliability data that must match Xeneta's [geo-hierarchy](https://www.xeneta.com/hubfs/2025-ocean-geo/xeneta-ocean-geo.html). For example, `far_east_main`."
+              },
+              {
+                "name": "date_from",
+                "value": "",
+                "type": "query",
+                "description": "Defines the start date of the date range for the requested reliability data in the `YYYY-MM-DD` format. The total range cannot exceed 31 days."
+              },
+              {
+                "name": "date_to",
+                "value": "",
+                "type": "query",
+                "description": "Defines the end date of the date range for the requested reliability data in the `YYYY-MM-DD` format. The total range cannot exceed 31 days."
+              },
+              {
+                "name": "carrier_slug",
+                "value": "",
+                "type": "query",
+                "description": "Defines the [carrier](list-all-carriers-reliability) whose reliability score will be returned in the response. If left blank, the response will not contain any carrier-specific data."
+              }
+            ]
+          },
+          "docs": "Returns reliability data for the requested [corridor](ref:list-all-corridors-reliability) and [carrier](ref:list-all-carriers-reliability)."
+        },
+        {
+          "info": {
+            "name": "List all corridors",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.xeneta.com/v3.0/ocean/capacity/available-corridors"
+          },
+          "docs": "Returns `available_corridors` object with a list of all corridors where Xeneta has Capacity data."
+        },
+        {
+          "info": {
+            "name": "Get capacity data",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.xeneta.com/v3.0/ocean/capacity",
+            "params": [
+              {
+                "name": "origin",
+                "value": "",
+                "type": "query",
+                "description": "Defines the origin location of the requested capacity data that must match Xeneta's [geo-hierarchy](https://www.xeneta.com/hubfs/2025-ocean-geo/xeneta-ocean-geo.html). For example, `far_east_main`."
+              },
+              {
+                "name": "destination",
+                "value": "",
+                "type": "query",
+                "description": "Defines the destination location of the requested capacity data that must match Xeneta's [geo-hierarchy](https://www.xeneta.com/hubfs/2025-ocean-geo/xeneta-ocean-geo.html). For example, `north_europe_main`."
+              },
+              {
+                "name": "date_from",
+                "value": "",
+                "type": "query",
+                "description": "Defines the start date of the date range for the requested capacity data in the `YYYY-MM-DD` format. The total range cannot exceed 31 days."
+              },
+              {
+                "name": "date_to",
+                "value": "",
+                "type": "query",
+                "description": "Defines the end date of the date range for the requested capacity data in the `YYYY-MM-DD` format. The total range cannot exceed 31 days."
+              }
+            ]
+          },
+          "docs": "Returns ocean market capacity data for the requested [corridor](ref:list-all-corridors-capacity)."
+        },
+        {
+          "info": {
+            "name": "List all carriers",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.xeneta.com/v3.0/ocean/carbon-emissions/available-carriers"
+          },
+          "docs": "Returns `available_carriers` object with a list of all carriers availble for Carbon Emissions."
+        },
+        {
+          "info": {
+            "name": "List all corridors",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.xeneta.com/v3.0/ocean/carbon-emissions/available-corridors"
+          },
+          "docs": "Returns `available_corridors` object with a list of all corridors where Xeneta has Carbon Emissions data."
+        },
+        {
+          "info": {
+            "name": "Get carbon emissions data",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.xeneta.com/v3.0/ocean/carbon-emissions",
+            "params": [
+              {
+                "name": "origin",
+                "value": "",
+                "type": "query",
+                "description": "Defines the origin location of the requested carbon emissions data. Must be a region as returned by the [available corridors](list-all-corridors-emissions) endpoint. For example, `north_europe_main`."
+              },
+              {
+                "name": "destination",
+                "value": "",
+                "type": "query",
+                "description": "Defines the destination location of the requested carbon emissions data. Must be a region as returned by the [available corridors](list-all-corridors-emissions) endpoint. For example, `far_east_main`."
+              },
+              {
+                "name": "date",
+                "value": "",
+                "type": "query",
+                "description": "Defines the start date of the date range for the requested capacity data in the `YYYY-MM-DD` format. Note that carbon emissions data is updated on a quarterly basis, so the response will contain data for the quarter that the requested date belongs to."
+              },
+              {
+                "name": "carrier_slug",
+                "value": "",
+                "type": "query",
+                "description": "Defines the [carrier](list-all-carriers-emissions) whose carbon emissions index score will be returned in the response. If left blank, the response will not contain any carrier-specific data."
+              }
+            ]
+          },
+          "docs": "Returns carbon emissions index score for the requested [corridor](ref:list-all-corridors-emissions) and [carrier](ref:list-all-carriers-emissions)."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}
