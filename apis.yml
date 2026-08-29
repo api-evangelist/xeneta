@@ -9,6 +9,18 @@ description: >-
   emissions, and schedule reliability data, plus a separate airline reports
   API for airlines, shippers, and freight forwarders.
 url: https://raw.githubusercontent.com/api-evangelist/xeneta/refs/heads/main/apis.yml
+deliveryModel:
+  model: saas
+  open_source: false
+  commercial: true
+  callable_host: true
+  label: Hosted service · you call their endpoint
+  confidence: high
+  source:
+  - openapi
+  - pricing
+  generated: '2026-08-28'
+  method: derived
 accessModel:
   pricing: unknown
   onboarding: self-serve
