@@ -1,8 +1,7 @@
 {
   "provider": "xeneta",
   "sources": [
-    "xeneta-air-api-openapi.yml",
-    "xeneta-ocean-api-openapi.yml"
+    "_original/xeneta-api-30-openapi.yml"
   ],
   "outputs": [
     "xeneta-air-api-openapi.yml",
@@ -11,6 +10,29 @@
   "archived": [],
   "errors": [],
   "warnings": [],
-  "notes": [],
-  "skipped": []
+  "notes": [
+    "sourced from openapi/_original/ (1 archived document(s)); previously refined output at the top level was skipped rather than re-split",
+    "xeneta-api-30-openapi.yml: upgraded openapi 3.1.0 -> OpenAPI 3.2.0",
+    "xeneta-api-30-openapi.yml: tagged paths GET /ocean/market-rates -> Ocean",
+    "xeneta-api-30-openapi.yml: tagged paths GET /ocean/estimated-rates -> Ocean",
+    "xeneta-api-30-openapi.yml: tagged paths GET /ocean/my-prices -> Ocean",
+    "xeneta-api-30-openapi.yml: tagged paths GET /ocean/carrier-spread/available-carriers -> Ocean",
+    "xeneta-api-30-openapi.yml: tagged paths GET /ocean/carrier-spread -> Ocean",
+    "xeneta-api-30-openapi.yml: tagged paths GET /ocean/schedule-reliability/available-carriers -> Ocean",
+    "xeneta-api-30-openapi.yml: tagged paths GET /ocean/schedule-reliability/available-corridors -> Ocean",
+    "xeneta-api-30-openapi.yml: tagged paths GET /ocean/schedule-reliability -> Ocean",
+    "xeneta-api-30-openapi.yml: tagged paths GET /ocean/capacity/available-corridors -> Ocean",
+    "xeneta-api-30-openapi.yml: tagged paths GET /ocean/capacity -> Ocean",
+    "xeneta-api-30-openapi.yml: tagged paths GET /ocean/carbon-emissions/available-carriers -> Ocean",
+    "xeneta-api-30-openapi.yml: tagged paths GET /ocean/carbon-emissions/available-corridors -> Ocean",
+    "xeneta-api-30-openapi.yml: tagged paths GET /ocean/carbon-emissions -> Ocean",
+    "xeneta-api-30-openapi.yml: tagged paths GET /air/market-rates -> Air",
+    "xeneta-api-30-openapi.yml: declared missing tag: Air",
+    "xeneta-api-30-openapi.yml: declared missing tag: Ocean",
+    "apis.yml register: already-registered"
+  ],
+  "skipped": [
+    "xeneta-air-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "xeneta-ocean-api-openapi.yml: previously refined output, superseded by openapi/_original/"
+  ]
 }

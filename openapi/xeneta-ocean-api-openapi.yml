@@ -1,6 +1,6 @@
-openapi: 3.1.0
+openapi: 3.2.0
 info:
-  title: xeneta-api-30 Air Ocean API
+  title: xeneta-api-30 Ocean API
   version: '3.0'
 servers:
 - url: https://api.xeneta.com/v3.0
@@ -637,7 +637,7 @@ paths:
   /ocean/carrier-spread:
     get:
       summary: Get carrier rates
-      description: Returns freight rates for the requested [carrier](ref:list-all-carriers-spread).
+      description: Returns freight rates for the requested carrier.
       operationId: get-carrier-rates
       parameters:
       - name: origin
@@ -939,7 +939,7 @@ paths:
   /ocean/schedule-reliability:
     get:
       summary: Get schedule reliability data
-      description: Returns reliability data for the requested [corridor](ref:list-all-corridors-reliability) and [carrier](ref:list-all-carriers-reliability).
+      description: Returns reliability data for the requested corridor and carrier.
       operationId: get-schedule-reliability-data
       parameters:
       - name: origin
@@ -1163,7 +1163,7 @@ paths:
   /ocean/capacity:
     get:
       summary: Get capacity data
-      description: Returns ocean market capacity data for the requested [corridor](ref:list-all-corridors-capacity).
+      description: Returns ocean market capacity data for the requested corridor.
       operationId: get-capacity-data
       parameters:
       - name: origin
@@ -1435,7 +1435,7 @@ paths:
   /ocean/carbon-emissions:
     get:
       summary: Get carbon emissions data
-      description: Returns carbon emissions index score for the requested [corridor](ref:list-all-corridors-emissions) and [carrier](ref:list-all-carriers-emissions).
+      description: Returns carbon emissions index score for the requested corridor and carrier.
       operationId: get-carbon-emissions-data
       parameters:
       - name: origin
